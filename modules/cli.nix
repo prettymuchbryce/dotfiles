@@ -1,5 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    git-crypt
+
     # Better alternatives
     ripgrep # grep
 

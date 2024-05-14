@@ -10,6 +10,9 @@
     docker
     docker-compose
 
+    # node
+    fnm # Fast node version manager
+
     # go
     # go
     # golangci-lint
@@ -35,6 +38,6 @@
     # rustc
 
     # shell
-    # shfmt
+    shfmt
   ];
 }

@@ -1,5 +1,6 @@
 {
   rl = "source ~/.zshrc";
+  nvm = "fnm";
   dotfiles = "vim ~/.dotfiles";
   vimrc ="vim ~/.dotfiles/modules/nvim/nvim";
   etchosts = "sudo vim /etc/hosts";
