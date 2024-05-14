@@ -29,10 +29,7 @@ Unfortunately not everything is automatable with nix-darwin, so there remains so
 
 ### TODO
 
-- Blow away git repo and restart
-- Move notes
-- neovim configuration / organize / plugins / notes plugin
-- go version manager
+- gvm
 - pyenv
 
 ### Resources

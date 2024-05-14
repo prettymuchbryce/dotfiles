@@ -38,7 +38,7 @@ require('lazy').setup {
   require 'plugins.nvim-treesitter',
   require 'plugins.copilot',
   require 'plugins.gitlinker',
-  require 'plugins.typescript-vim',
+  require 'plugins.typescript-tools',
   require 'plugins.vim-surround',
   require 'plugins.vscode',
 }
