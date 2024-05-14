@@ -7,8 +7,8 @@
     gcc
 
     # docker
-    docker
-    docker-compose
+    # docker
+    # docker-compose
 
     # node
     fnm # Fast node version manager

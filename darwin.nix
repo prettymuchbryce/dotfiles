@@ -38,15 +38,16 @@
       };
 
       casks = [
-	"signal"
-	"telegram"
 	"brave-browser"
+	"docker"
 	"iterm2"
 	"karabiner-elements"
 	"raycast"
 	"signal"
+	"signal"
 	"slack"
 	"spectacle"
+	"telegram"
         "amethyst"
       ];
     };
