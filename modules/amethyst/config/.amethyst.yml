@@ -1,0 +1,79 @@
+layouts:
+  - tall
+  - fullscreen
+  - two-pane
+
+
+# Meh
+mod1:
+    - option
+    - shift
+    - control
+mod2:
+    - option
+    - shift
+    - control
+    - command
+
+# Increase the number of windows in the main pane. Note that not all layouts respond to this command.
+increase-main:
+  mod: mod1
+  key: ','
+
+# Decrease the number of windows in the main pane. Note that not all layouts respond to this command.
+decrease-main:
+  mod: mod1
+  key: '.'
+
+# Shrink the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
+shrink-main:
+  mod: mod1
+  key: j
+
+# Expand the main pane by a percentage of the screen dimension as defined by window-resize-step. Note that not all layouts respond to this command.
+expand-main:
+  mod: mod1
+  key: ;
+
+# Focus the next window in the list going counter-clockwise.
+focus-ccw:
+  mod: mod1
+  key: k
+
+# Focus the next window in the list going clockwise.
+focus-cw:
+  mod: mod1
+  key: l
+
+# Move the currently focused window onto the next screen in the list going counter-clockwise.
+swap-screen-ccw:
+  mod: mod2
+  key: j
+
+# Move the currently focused window onto the next screen in the list going clockwise.
+swap-screen-cw:
+  mod: mod2
+  key: ;
+
+# Swap the position of the currently focused window with the next window in the list going counter-clockwise.
+swap-ccw:
+  mod: mod2
+  key: k
+
+# Swap the position of the currently focused window with the next window in the list going clockwise.
+swap-cw:
+  mod: mod2
+  key: l
+
+# Move the currently focused window to the space to the left.
+throw-space-left:
+  mod: mod2
+  key: down
+
+# Move currently the focused window to the space to the right.
+throw-space-right:
+  mod: mod2
+  key: up
+
+select-tall-layout:
+  key: ""
