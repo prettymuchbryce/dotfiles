@@ -1,6 +1,6 @@
 ## Developer Machine Nix Configuration
 
-This configuration automatically sets up a fresh Mac to my personal comfy preferences.AS
+This configuration automatically sets up a fresh Mac to my personal comfy preferences.
 
 Unfortunately not everything is automatable with nix-darwin, so there remains some manual steps.
 
@@ -12,12 +12,12 @@ Unfortunately not everything is automatable with nix-darwin, so there remains so
 1. Install [Homebrew](https://brew.sh).
 1. Install Nix via [nix-installer](https://github.com/DeterminateSystems/nix-installer).
 1. Install `nix-darwin` via `nix run nix-darwin -- switch --flake ~/.config/nix-darwin`.
-1. Follow instructions in modules/iterm2/README.md (TODO: Automate this)
+1. Follow instructions in modules/iterm2/README.md (TODO: Automate this).
 
 ### Additional Manual steps
 
-* Complete setup of password manager
-* Install necessary Brave browser extensions
+* Complete setup of password manager.
+* Install necessary Brave browser extensions.
 * Create a new SSH key for GitHub, etc. These should be per-machine.
 * Add application-specific shortcuts via Preferences -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. This is not possible yet from nix-darwin AFAIK.
     * Brave tab left/right
