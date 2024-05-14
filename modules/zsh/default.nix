@@ -16,8 +16,8 @@
     enableZshIntegration = true;
   };
 
-  home.file."scripts".source = ./scripts;
-  # home.file."scripts/query-staked.sh".source = ../../.secrets/query-staked.sh;
+  home.file."scripts/wd".source = ./scripts/wd;
+  home.file."scripts/query-staked.sh".source = ../../.secrets/query-staked.sh;
 
   programs.zsh = {
     enable = true;

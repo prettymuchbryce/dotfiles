@@ -5,9 +5,8 @@ export PATH=$PATH:/Users/bryce/projects/go/bin
 # Rust
 export PATH=$PATH:$HOME/.cargo/bin
 
-# nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# fnm
+eval "$(fnm env --use-on-cd)"
 
 # alias play="sudo cp -rf /etc/hosts.bryce.play /etc/hosts"
 # alias work="sudo cp -rf /etc/hosts.bryce.work /etc/hosts"

@@ -38,6 +38,8 @@
       };
 
       casks = [
+	"signal"
+	"telegram"
 	"brave-browser"
 	"iterm2"
 	"karabiner-elements"
