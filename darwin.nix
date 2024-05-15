@@ -49,6 +49,7 @@
 	"spectacle"
 	"telegram"
         "amethyst"
+	"ollama"
       ];
     };
 
