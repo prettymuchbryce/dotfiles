@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     git-crypt
 
@@ -9,5 +10,7 @@
     jq
   ];
 
-  programs.starship = { enable = true; };
+  programs.starship = {
+    enable = true;
+  };
 }

@@ -2,7 +2,7 @@
   rl = "source ~/.zshrc";
   nvm = "fnm";
   dotfiles = "vim ~/.dotfiles";
-  vimrc ="vim ~/.dotfiles/modules/nvim/nvim";
+  vimrc = "vim ~/.dotfiles/modules/nvim/nvim";
   etchosts = "sudo vim /etc/hosts";
   prj = "cd ~/projects";
   nixrb = "darwin-rebuild switch --flake ~/.dotfiles --verbose";

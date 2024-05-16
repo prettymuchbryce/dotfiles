@@ -9,23 +9,30 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
-  {
-    darwinConfigurations."Bryces-MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
-      modules = [
-	./darwin.nix
-        home-manager.darwinModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.bryce.imports = [ ./home.nix ];
-          };
-        }
-      ];
-    };
+  outputs =
+    inputs@{
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      darwinConfigurations."Bryces-MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
+        modules = [
+          ./darwin.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.bryce.imports = [ ./home.nix ];
+            };
+          }
+        ];
+      };
 
-    # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Bryces-MacBook-Pro-2".pkgs;
-  };
+      # Expose the package set, including overlays, for convenience.
+      darwinPackages = self.darwinConfigurations."Bryces-MacBook-Pro-2".pkgs;
+    };
 }

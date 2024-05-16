@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     # common
     gnumake
@@ -39,5 +40,8 @@
 
     # shell
     shfmt
+
+    # nix
+    nixfmt-rfc-style
   ];
 }

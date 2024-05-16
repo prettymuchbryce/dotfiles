@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -34,5 +35,4 @@
       ${builtins.readFile ../../.secrets/env-vars.sh}
     '';
   };
-
 }
