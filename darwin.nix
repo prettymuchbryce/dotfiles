@@ -51,6 +51,7 @@
         "amethyst"
 	"ollama"
 	"spotify"
+	"protonvpn"
       ];
     };
 
