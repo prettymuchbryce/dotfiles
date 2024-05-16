@@ -50,6 +50,7 @@
 	"telegram"
         "amethyst"
 	"ollama"
+	"spotify"
       ];
     };
 
