@@ -6,7 +6,7 @@ return {
         open_chat_command = 'below new | setlocal wrap | call vim_ai#MakeScratchWindow()',
       },
       options = {
-        model = 'gpt-4',
+        model = 'gpt-4o',
       },
     }
   end,

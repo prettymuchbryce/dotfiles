@@ -4,6 +4,9 @@
     # common
     gnumake
 
+    # Solana
+    solana-cli
+
     # C
     gcc
 
@@ -33,10 +36,7 @@
     # ruff
 
     # rust
-    # cargo
-    # cargo-tarpaulin
-    # perl # this is required by rust
-    # rustc
+    rustup
 
     # shell
     shfmt

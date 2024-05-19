@@ -2,9 +2,6 @@
 export GOPATH="/Users/bryce/projects/go"
 export PATH=$PATH:/Users/bryce/projects/go/bin
 
-# Rust
-export PATH=$PATH:$HOME/.cargo/bin
-
 # fnm
 eval "$(fnm env --use-on-cd)"
 
