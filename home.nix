@@ -23,6 +23,7 @@
     ./modules/nvim
     ./modules/programming.nix
     ./modules/spectacle
+    ./modules/tmux
     ./modules/zsh
   ];
 

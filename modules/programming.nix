@@ -35,6 +35,8 @@
     # python3Packages.ipython
     # ruff
 
+    postgresql
+
     # rust
     rustup
 
