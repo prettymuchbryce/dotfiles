@@ -53,4 +53,10 @@
       (callPackage ./tmux-colortag.nix { })
     ];
   };
+
+  # Tmux configs
+  home.file.".config/tmuxinator" = {
+    source = ./tmuxinator;
+    recursive = true;
+  };
 }

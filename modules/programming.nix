@@ -45,5 +45,8 @@
 
     # nix
     nixfmt-rfc-style
+
+    # yaml
+    yamlfix
   ];
 }

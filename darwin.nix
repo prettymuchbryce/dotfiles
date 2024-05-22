@@ -51,6 +51,7 @@
       "ollama"
       "spotify"
       "protonvpn"
+      "zoom"
     ];
   };
 

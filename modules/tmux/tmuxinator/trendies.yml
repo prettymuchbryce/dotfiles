@@ -1,0 +1,13 @@
+---
+name: trendies
+root: ~/projects/trendies
+windows:
+  - docker:
+      - cd trendies
+      - docker-compose down && docker-compose up migrations postgres
+  - server: [cd trendies/server, npm run dev]
+  - listener: [cd trendies/listener, npm run dev]
+  - web: [cd trendies-web, npm run dev]
+  - vim_web: [cd trendies-web, vim .]
+  - vim_server: [cd trendies, vim .]
+  - misc_term: [ls -la]
