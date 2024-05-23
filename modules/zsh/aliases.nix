@@ -13,6 +13,7 @@
   # tmux
   tkill = "tmux kill-server";
   tstart = "tmux start-server";
+  mux = "tmuxinator";
 
   # alias ls='exa --icons -F -H --group-directories-first --git -1'
   # alias play="sudo cp -rf /etc/hosts.bryce.play /etc/hosts"

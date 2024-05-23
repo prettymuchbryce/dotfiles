@@ -41,6 +41,8 @@ require('lazy').setup {
   require 'plugins.typescript-tools',
   require 'plugins.vim-surround',
   require 'plugins.vscode',
+  require 'plugins.octo',
+  require 'plugins.bufferline',
 }
 
 require 'notes'

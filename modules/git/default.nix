@@ -33,7 +33,7 @@
 
     gh = {
       enable = true;
-      settings.git_protocol = "ssh";
+      settings = ../../.secrets/gh-config.nix;
     };
   };
 }

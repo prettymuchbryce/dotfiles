@@ -15,6 +15,12 @@ vim.api.nvim_set_keymap('n', '<C-l>', ':bprevious<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-k>', ':bnext<CR>', { noremap = true })
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { silent = true })
 
+-- Bind 'n' to go to the next search item
+vim.keymap.set('n', 'n', 'n', { noremap = true, silent = true })
+
+-- Bind 'N' to go to the previous search item
+vim.keymap.set('n', 'N', 'N', { noremap = true, silent = true })
+
 -- Close buffer
 vim.api.nvim_set_keymap('n', '<C-x>', ':bp|bd #<CR>', { noremap = true })
 
