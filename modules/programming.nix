@@ -3,12 +3,13 @@
   home.packages = with pkgs; [
     # common
     gnumake
+    libiconv
 
     # Solana
     solana-cli
 
     # C
-    gcc
+    # gcc
 
     # docker
     # docker

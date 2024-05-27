@@ -5,6 +5,8 @@ return {
   config = function()
     require('bufferline').setup()
 
+    -- TODO: Fix this.
+    -- TODO: Install lualine.
     -- vim.api.nvim_set_keymap('n', '[b', ':BufferLineCycleNext<CR>', { silent = true })
     -- vim.api.nvim_set_keymap('n', 'b]', ':BufferLineCyclePrev<CR>', { silent = true })
   end,

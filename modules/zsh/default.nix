@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs.fzf = {
     enable = true;
@@ -35,4 +35,7 @@
       ${builtins.readFile ../../.secrets/env-vars.sh}
     '';
   };
+
+  # Add rust bin to path
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
 }

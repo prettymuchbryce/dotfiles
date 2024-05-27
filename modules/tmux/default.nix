@@ -42,6 +42,9 @@
       bind k select-pane -D
       bind l select-pane -U
       bind ';' select-pane -R
+
+      # Bind K to clear history
+      bind K send-keys -R
     '';
 
     plugins = with pkgs; [

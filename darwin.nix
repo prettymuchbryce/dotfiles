@@ -52,6 +52,8 @@
       "spotify"
       "protonvpn"
       "zoom"
+      "audacity"
+      "vlc"
     ];
   };
 
@@ -69,4 +71,8 @@
   system.defaults.dock.wvous-bl-corner = 1;
   system.defaults.dock.wvous-tr-corner = 1;
   system.defaults.dock.wvous-br-corner = 1;
+
+  # No system sounds
+  system.defaults.NSGlobalDomain."com.apple.sound.beep.feedback" = 0;
+  system.defaults.NSGlobalDomain."com.apple.sound.beep.volume" = 0.0;
 }

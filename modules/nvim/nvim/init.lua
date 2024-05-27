@@ -43,6 +43,8 @@ require('lazy').setup {
   require 'plugins.vscode',
   require 'plugins.octo',
   require 'plugins.bufferline',
+  require 'plugins.vim-qfedit',
+  require 'plugins.nvim-bqf',
 }
 
 require 'notes'
