@@ -15,6 +15,9 @@
   tstart = "tmux start-server";
   mux = "tmuxinator";
 
+  # trendies
+  taws = "AWS_PROFILE=trendies aws";
+
   # alias ls='exa --icons -F -H --group-directories-first --git -1'
   # alias play="sudo cp -rf /etc/hosts.bryce.play /etc/hosts"
   # alias work="sudo cp -rf /etc/hosts.bryce.work /etc/hosts"

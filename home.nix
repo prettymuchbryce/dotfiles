@@ -16,6 +16,7 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   imports = [
+    ./modules/aws
     ./modules/amethyst
     ./modules/cli.nix
     ./modules/git

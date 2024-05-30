@@ -84,7 +84,9 @@ return {
       },
       view = {
         side = 'left',
-        width = 40,
+        width = {
+          min = 40,
+        },
         relativenumber = true,
       },
     }
