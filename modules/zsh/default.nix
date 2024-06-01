@@ -30,6 +30,11 @@
     shellAliases = import ./aliases.nix;
     history.extended = true;
 
+    profileExtra = ''
+      setopt interactivecomments
+      eval "$(/opt/homebrew/bin/brew shellenv)" # homebrew
+    '';
+
     initExtraBeforeCompInit = ''
       ${builtins.readFile ./session_variables.zsh}
       ${builtins.readFile ./functions.zsh}

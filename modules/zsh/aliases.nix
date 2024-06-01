@@ -10,6 +10,9 @@
   notes = "cd ~/notes && vim ~/notes/README.md -c \":NvimTreeOpen\"";
   staked = "bash ~/scripts/query-staked.sh";
 
+  # open current directory in github
+  ghw = "gh repo view --web";
+
   # tmux
   tkill = "tmux kill-server";
   tstart = "tmux start-server";
