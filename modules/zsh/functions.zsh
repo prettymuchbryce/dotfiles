@@ -1,4 +1,4 @@
 # Install warpdrive
 wd() {
-  . ~/scripts/wd/wd.sh
+  . ~/zsh/plugins/wd/wd.sh
 }

@@ -31,8 +31,15 @@
     lua
 
     # python
-    # (python3.withPackages (ps: with ps; [ setuptools pip ]))
-    # poetry
+    (python3.withPackages (
+      ps: with ps; [
+        setuptools
+        pip
+        openai
+      ]
+    ))
+    poetry
+
     # python3Packages.ipython
     # ruff
 

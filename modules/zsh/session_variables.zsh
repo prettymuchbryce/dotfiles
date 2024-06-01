@@ -1,6 +1,7 @@
 # Go
 export GOPATH="/Users/bryce/projects/go"
 export PATH=$PATH:/Users/bryce/projects/go/bin
+export ZSH_CUSTOM="/Users/bryce/zsh"
 
 # fnm
 eval "$(fnm env --use-on-cd)"

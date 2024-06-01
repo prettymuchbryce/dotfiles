@@ -17,7 +17,8 @@
     enableZshIntegration = true;
   };
 
-  home.file."scripts/wd".source = ./scripts/wd;
+  home.file."zsh/plugins".source = ./plugins;
+  home.file.".config/openaiapirc".source = ../../.secrets/openaiapirc;
   home.file."scripts/query-staked.sh".source = ../../.secrets/query-staked.sh;
 
   programs.zsh = {
@@ -33,6 +34,9 @@
       ${builtins.readFile ./session_variables.zsh}
       ${builtins.readFile ./functions.zsh}
       ${builtins.readFile ../../.secrets/env-vars.sh}
+      # zsh_codex
+      ${builtins.readFile ./plugins/zsh_codex/zsh_codex.plugin.zsh}
+      bindkey '^O' create_completion
     '';
   };
 
