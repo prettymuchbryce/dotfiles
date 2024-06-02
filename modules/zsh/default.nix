@@ -21,6 +21,9 @@
   home.file.".config/openaiapirc".source = ../../.secrets/openaiapirc;
   home.file."scripts/query-staked.sh".source = ../../.secrets/query-staked.sh;
 
+  home.file.".config/hosts/hosts.focus".source = ./hosts/hosts.focus;
+  home.file.".config/hosts/hosts.unfocus".source = ./hosts/hosts.unfocus;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;

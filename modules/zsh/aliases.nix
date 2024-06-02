@@ -21,10 +21,8 @@
   # trendies
   taws = "AWS_PROFILE=trendies aws";
 
-  # alias ls='exa --icons -F -H --group-directories-first --git -1'
-  # alias play="sudo cp -rf /etc/hosts.bryce.play /etc/hosts"
-  # alias work="sudo cp -rf /etc/hosts.bryce.work /etc/hosts"
-  # alias focus="sudo cp -rf /etc/hosts.bryce.focus /etc/hosts"
+  focus = "sudo cp -rf ~/.config/hosts/hosts.focus /etc/hosts";
+  unfocus = "sudo cp -rf ~/.config/hosts/hosts.unfocus /etc/hosts";
 
   # Navigation;
   ".." = "cd ..";
