@@ -45,6 +45,7 @@ require('lazy').setup {
   require 'plugins.bufferline',
   require 'plugins.vim-qfedit',
   require 'plugins.nvim-bqf',
+  require 'plugins.lualine',
 }
 
 require 'notes'
