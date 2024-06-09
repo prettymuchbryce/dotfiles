@@ -37,23 +37,22 @@
     };
 
     casks = [
+      "audacity"
       "brave-browser"
       "docker"
       "iterm2"
       "karabiner-elements"
+      "nikitabobko/tap/aerospace"
+      "ollama"
+      "protonvpn"
       "raycast"
-      "signal"
       "signal"
       "slack"
       "spectacle"
-      "telegram"
-      "amethyst"
-      "ollama"
       "spotify"
-      "protonvpn"
-      "zoom"
-      "audacity"
+      "telegram"
       "vlc"
+      "zoom"
     ];
   };
 
