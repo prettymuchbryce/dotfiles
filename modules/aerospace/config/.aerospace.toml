@@ -106,8 +106,8 @@ alt-l = 'join-with up'
 alt-semicolon = 'join-with right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-ctrl-shift-minus = 'resize smart -50'
-alt-ctrl-shift-equal = 'resize smart +50'
+alt-ctrl-shift-minus = 'resize smart -200'
+alt-ctrl-shift-equal = 'resize smart +200'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 alt-ctrl-shift-1 = 'workspace 1'

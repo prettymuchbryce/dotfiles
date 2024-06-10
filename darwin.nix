@@ -74,4 +74,8 @@
   # No system sounds
   system.defaults.NSGlobalDomain."com.apple.sound.beep.feedback" = 0;
   system.defaults.NSGlobalDomain."com.apple.sound.beep.volume" = 0.0;
+
+  # Key Repeat
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
+  system.defaults.NSGlobalDomain.KeyRepeat = 2;
 }
