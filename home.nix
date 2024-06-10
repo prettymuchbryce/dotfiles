@@ -18,7 +18,6 @@
   imports = [
     ./modules/aerospace
     ./modules/aws
-    ./modules/amethyst
     ./modules/cli.nix
     ./modules/git
     ./modules/karabiner

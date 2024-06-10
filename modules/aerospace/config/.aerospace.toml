@@ -120,6 +120,9 @@ alt-ctrl-shift-7 = 'workspace 7'
 alt-ctrl-shift-8 = 'workspace 8'
 alt-ctrl-shift-9 = 'workspace 9'
 
+alt-ctrl-shift-up = 'workspace next'
+alt-ctrl-shift-down = 'workspace prev'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-ctrl-cmd-shift-1 = 'move-node-to-workspace 1'
 alt-ctrl-cmd-shift-2 = 'move-node-to-workspace 2'
