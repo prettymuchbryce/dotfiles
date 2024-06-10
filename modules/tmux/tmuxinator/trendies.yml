@@ -11,3 +11,9 @@ windows:
   - vim_web: [cd trendies-web, vim .]
   - vim_backend: [cd trendies, vim .]
   - misc_term: [ls -la]
+  - listener_logs_staging:
+      - cd trendies/listener
+      - AWS_PROFILE=trendies awslogs get /ecs/listener-staging ALL --watch
+  - server_logs_staging:
+      - cd trendies/server
+      - AWS_PROFILE=trendies awslogs get /ecs/server-staging ALL --watch

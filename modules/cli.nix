@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+    awslogs
     git-crypt
 
     # Better alternatives
