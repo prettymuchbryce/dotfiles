@@ -45,6 +45,9 @@
 
       # Bind K to clear history
       bind K send-keys -R
+
+      # Use pbcopy for copying to system clipboard on macOS
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
     '';
 
     plugins = with pkgs; [
