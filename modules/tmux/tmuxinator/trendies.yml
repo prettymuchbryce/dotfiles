@@ -19,3 +19,6 @@ windows:
   - server_logs_staging:
       - cd trendies/server
       - AWS_PROFILE=trendies awslogs get /ecs/server-staging ALL --watch
+  - loops_logs_staging:
+      - cd trendies/server
+      - AWS_PROFILE=trendies awslogs get /ecs/loops-staging ALL --watch

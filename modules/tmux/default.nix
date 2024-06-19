@@ -46,8 +46,27 @@
       # Bind K to clear history
       bind K send-keys -R
 
+      # Exit
+      bind-key -T prefix C-c detach-client
+
+      # Bind ESC to enter copy mode
+      bind-key -n Escape copy-mode
+
+      # Bind i to exit copy mode
+      bind-key -T copy-mode-vi i send-keys -X cancel
+
       # Use pbcopy for copying to system clipboard on macOS
-      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+      bind -T copy-mode-vi C-v send-keys -X begin-selection
+      bind -T copy-mode-vi y send-keys -X copy-pipe "pbcopy"
+
+      # Scroll up/down by half a page
+      bind-key -T copy-mode-vi C-u send-keys -X page-up
+      bind-key -T copy-mode-vi C-d send-keys -X page-down
+
+      # Go to the top/bottom of the buffer
+      bind-key -T copy-mode-vi g switch-client -T custom-table
+      bind-key -T custom-table g send-keys -X history-top \; switch-client -T copy-mode-vi
+      bind-key -T copy-mode-vi G send-keys -X history-bottom
     '';
 
     plugins = with pkgs; [
