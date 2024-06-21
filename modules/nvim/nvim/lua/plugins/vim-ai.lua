@@ -6,8 +6,7 @@ return {
         open_chat_command = 'below new | setlocal wrap | call vim_ai#MakeScratchWindow()',
       },
       options = {
-        model = 'llama3:70b',
-        endpoint_url = 'http://localhost:11434/v1/chat/completions',
+        model = 'gpt-4o',
       },
     }
   end,

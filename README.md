@@ -25,7 +25,6 @@ Unfortunately not everything is automatable with nix-darwin, so there remains so
 * Create a new SSH key for GitHub, etc. These should be per-machine.
 * Add application-specific shortcuts via Preferences -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. This is not possible yet from nix-darwin AFAIK.
     * Brave tab left/right
-    * Mission Control / Spaces shortcuts (Note: Requires creating new spaces via Mission Control first)
 * Follow secret steps in `./.secrets/README.md`
 
 ### Resources

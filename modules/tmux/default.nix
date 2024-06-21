@@ -50,7 +50,7 @@
       bind-key -T prefix C-c detach-client
 
       # Bind ESC to enter copy mode
-      bind-key -n Escape copy-mode
+      # bind-key -n Escape copy-mode
 
       # Bind i to exit copy mode
       bind-key -T copy-mode-vi i send-keys -X cancel
