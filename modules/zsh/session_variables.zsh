@@ -6,6 +6,9 @@ export ZSH_CUSTOM="/Users/bryce/zsh"
 # fnm
 eval "$(fnm env --use-on-cd)"
 
+# ollama
+export OLLAMA_NOHISTORY=1
+
 # alias play="sudo cp -rf /etc/hosts.bryce.play /etc/hosts"
 # alias work="sudo cp -rf /etc/hosts.bryce.work /etc/hosts"
 # alias focus="sudo cp -rf /etc/hosts.bryce.focus /etc/hosts"

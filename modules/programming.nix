@@ -36,6 +36,8 @@
         setuptools
         pip
         openai
+        simple-http-server
+        pipx
       ]
     ))
     poetry

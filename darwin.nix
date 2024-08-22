@@ -54,6 +54,8 @@
       "vlc"
       "zoom"
       "activitywatch"
+      "figma"
+      "notion"
     ];
   };
 

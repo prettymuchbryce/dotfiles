@@ -48,6 +48,9 @@
     '';
   };
 
-  # Add rust bin to path
-  home.sessionPath = [ "$HOME/.cargo/bin" ];
+  # Add rust bin and local bin to path
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+    "/Users/bryce/.local/bin"
+  ];
 }

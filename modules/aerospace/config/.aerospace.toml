@@ -58,6 +58,7 @@ outer.right =      0
 inherit-env-vars = true  # If you don't touch "exec" section,
 [exec.env-vars]          # it will fallback to "default-config.toml"
 PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
+XDG_CONFIG_HOME = '${HOME}/.config'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -82,10 +83,10 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 # You can uncomment this line to open up terminal with alt + enter shortcut
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
 # alt-enter = 'exec-and-forget open -n /System/Applications/Utilities/Terminal.app'
-
+# See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
+alt-ctrl-shift-d = 'fullscreen'
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-ctrl-shift-enter = 'layout tiles horizontal vertical'
-#alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-ctrl-shift-j = 'focus left'
@@ -137,5 +138,3 @@ alt-ctrl-cmd-shift-9 = 'move-node-to-workspace 9'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 
-# See: https://nikitabobko.github.io/AeroSpace/commands#fullscreen
-alt-ctrl-shift-d = 'fullscreen'

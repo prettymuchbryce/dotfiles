@@ -9,6 +9,7 @@
   tf = "terraform";
   notes = "cd ~/notes && vim ~/notes/README.md -c \":NvimTreeOpen\"";
   staked = "bash ~/scripts/query-staked.sh";
+  claudeeng = "(cd /Users/bryce/projects/claude-engineer && poetry run python main.py)";
 
   open-webui = "docker run -d -p 6671:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main";
 
