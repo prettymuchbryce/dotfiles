@@ -6,6 +6,7 @@
   etchosts = "sudo vim /etc/hosts";
   prj = "cd ~/projects";
   nixrb = "darwin-rebuild switch --flake ~/.dotfiles --verbose";
+  nixfupdate = "nix flake update";
   tf = "terraform";
   notes = "cd ~/notes && vim ~/notes/README.md -c \":NvimTreeOpen\"";
   staked = "bash ~/scripts/query-staked.sh";
