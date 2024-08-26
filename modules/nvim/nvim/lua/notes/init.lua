@@ -114,8 +114,8 @@ vim.cmd [[
 -- Which-key: +Notes
 -- NOTE: Requires which-key to be installed so may fail on first load
 require('which-key').add {
-  { 'N', group = 'Notes' },
-  { 'Nn', '<cmd>NewNote<cr>', desc = 'Create a new note' },
-  { 'No', '<cmd>OpenNotes<cr>', desc = 'Open notes' },
-  { 'Nt', '<cmd>ToggleTimestampMode<cr>', desc = 'Toggle timestamp mode' },
+  { '<leader>N', group = 'Notes' },
+  { '<leader>Nn', '<cmd>NewNote<cr>', desc = 'Create a new note' },
+  { '<leader>No', '<cmd>OpenNotes<cr>', desc = 'Open notes' },
+  { '<leader>Nt', '<cmd>ToggleTimestampMode<cr>', desc = 'Toggle timestamp mode' },
 }
