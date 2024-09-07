@@ -56,6 +56,8 @@
     # nix
     nixfmt-rfc-style
 
+    ffmpeg
+
     # yaml
     yamlfix
   ];

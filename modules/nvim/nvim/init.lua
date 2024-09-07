@@ -47,6 +47,9 @@ require('lazy').setup {
   require 'plugins.nvim-bqf',
   require 'plugins.lualine',
   require 'plugins.fugitive',
+  require 'plugins.avante',
+  require 'plugins.gh',
+  require 'plugins.rainbow-delimiters',
 }
 
 require 'notes'

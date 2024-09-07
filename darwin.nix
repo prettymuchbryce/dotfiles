@@ -56,6 +56,7 @@
       "activitywatch"
       "figma"
       "notion"
+      "soulseek"
     ];
   };
 

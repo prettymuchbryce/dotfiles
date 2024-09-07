@@ -32,9 +32,9 @@ return { -- Autoformat
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
-      javascript = { { 'prettierd', 'prettier' } },
-      typescript = { { 'prettierd', 'prettier' } },
-      typescriptreact = { { 'prettierd', 'prettier' } },
+      javascript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescript = { 'prettierd', 'prettier', stop_after_first = true },
+      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       yaml = { 'yamlfix' },
     },
   },
