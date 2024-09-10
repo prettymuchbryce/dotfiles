@@ -44,7 +44,7 @@
       bind ';' select-pane -R
 
       # Bind K to clear history
-      bind K send-keys -R
+      bind -n K send-keys clear-history
 
       # Exit
       bind-key -T prefix C-c detach-client
