@@ -60,5 +60,8 @@
 
     # yaml
     yamlfix
+
+    # terraform
+    tenv
   ];
 }

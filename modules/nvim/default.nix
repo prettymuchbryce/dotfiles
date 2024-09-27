@@ -11,4 +11,6 @@
     defaultEditor = true;
     extraConfig = ":luafile ~/.config/nvim/init.lua;";
   };
+
+  home.file.".config/open-router.token".source = ../../.secrets/open-router.token;
 }

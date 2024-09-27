@@ -17,6 +17,7 @@
 
   imports = [
     ./modules/aerospace
+    ./modules/alacritty
     ./modules/aws
     ./modules/cli.nix
     ./modules/git
@@ -25,6 +26,7 @@
     ./modules/programming.nix
     ./modules/spectacle
     ./modules/tmux
+    ./modules/zellij
     ./modules/zsh
   ];
 

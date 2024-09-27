@@ -49,7 +49,7 @@ def initialize_openai_api():
         organization=oai_config.get("organization")
     )
 
-    oai_config.setdefault("model", "gpt-3.5-turbo-0613")
+    oai_config.setdefault("model", "gpt-4o-mini")
     return client, oai_config
 
 client, config = initialize_openai_api()

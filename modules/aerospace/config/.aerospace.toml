@@ -49,6 +49,7 @@ key-mapping.preset = 'qwerty'
 inner.horizontal = 0
 inner.vertical =   0
 outer.left =       760
+# outer.left =       0
 outer.bottom =     0
 outer.top =        0
 outer.right =      760
@@ -100,10 +101,10 @@ alt-ctrl-cmd-shift-l = 'move up'
 alt-ctrl-cmd-shift-semicolon = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#join-with
-alt-j = 'join-with left'
-alt-k = 'join-with down'
-alt-l = 'join-with up'
-alt-semicolon = 'join-with right'
+# alt-j = 'join-with left'
+# alt-k = 'join-with down'
+# alt-l = 'join-with up'
+# alt-semicolon = 'join-with right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
 alt-ctrl-shift-minus = 'resize smart -200'

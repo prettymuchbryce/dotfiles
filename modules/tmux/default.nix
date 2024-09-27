@@ -13,6 +13,9 @@
     tmuxinator.enable = true;
     historyLimit = 30000;
     extraConfig = ''
+      # Move status bar to the top
+      set-option -g status-position top
+
       # Default termtype. If the rcfile sets $TERM, that overrides this value.
       set -g terminal-overrides ',xterm-256color:Tc'
 
@@ -43,6 +46,11 @@
       bind l select-pane -U
       bind ';' select-pane -R
 
+      bind-key -T root  j if -F "#{==:#{pane_mode},tree-mode}" "send h" "send j"
+      bind-key -T root  k if -F "#{==:#{pane_mode},tree-mode}" "send j" "send k"
+      bind-key -T root  l if -F "#{==:#{pane_mode},tree-mode}" "send k" "send l"
+      bind-key -T root \; if -F "#{==:#{pane_mode},tree-mode}" "send l" "send \;"
+
       # Bind K to clear history
       bind -n K send-keys clear-history
 
@@ -67,6 +75,29 @@
       bind-key -T copy-mode-vi g switch-client -T custom-table
       bind-key -T custom-table g send-keys -X history-top \; switch-client -T copy-mode-vi
       bind-key -T copy-mode-vi G send-keys -X history-bottom
+
+      # Enable focus events
+      set -g focus-events on
+
+      # Increase scrollback buffer size
+      set -g history-limit 50000
+
+      # Customize the status bar
+      set -g status-style bg=#000000,fg=white
+      set -g window-status-current-style bg=white,fg=black,bold
+      set -g status-left-length 40
+      set -g status-left "#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P"
+      set -g status-right "#[fg=cyan]%d %b %R"
+
+      # Set window notifications
+      setw -g monitor-activity on
+      set -g visual-activity on
+
+      # Automatically renumber windows when one is closed
+      set -g renumber-windows on
+
+      # Enable aggressive resize
+      setw -g aggressive-resize on
     '';
 
     plugins = with pkgs; [
