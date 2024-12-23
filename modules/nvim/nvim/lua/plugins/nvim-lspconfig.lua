@@ -44,6 +44,8 @@ return { -- LSP Configuration & Plugins
     --    That is to say, every time a new file is opened that is associated with
     --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
     --    function will be executed to configure the current buffer
+
+    local nvim_lsp = require 'lspconfig'
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -167,7 +169,15 @@ return { -- LSP Configuration & Plugins
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
       --
-
+      tsserver = {
+        -- on_attach = on_attach,
+        root_dir = nvim_lsp.util.root_pattern 'package.json',
+        single_file_support = false,
+      },
+      denols = {
+        -- on_attach = on_attach,
+        root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
+      },
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
@@ -196,6 +206,8 @@ return { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'denols', -- Deno(js/ts)
+      'tsserver', -- Typescript
       'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }

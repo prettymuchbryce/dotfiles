@@ -21,6 +21,7 @@
     ./modules/aws
     ./modules/cli.nix
     ./modules/git
+    ./modules/go
     ./modules/karabiner
     ./modules/nvim
     ./modules/programming.nix
