@@ -169,7 +169,7 @@ return { -- LSP Configuration & Plugins
       -- But for many setups, the LSP (`tsserver`) will work just fine
       -- tsserver = {},
       --
-      tsserver = {
+      ts_ls = {
         -- on_attach = on_attach,
         root_dir = nvim_lsp.util.root_pattern 'package.json',
         single_file_support = false,
@@ -207,7 +207,7 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'denols', -- Deno(js/ts)
-      'tsserver', -- Typescript
+      'ts_ls', -- Typescript
       'stylua', -- Used to format Lua code
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }

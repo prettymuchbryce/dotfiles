@@ -48,6 +48,7 @@ require('lazy').setup({
   require 'plugins.avante',
   require 'plugins.gh',
   require 'plugins.rainbow-delimiters',
+  require 'plugins.vim-dadbod-ui',
 }, {
   performance = {
     rtp = {
