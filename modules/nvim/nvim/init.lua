@@ -22,7 +22,7 @@ vim.opt.rtp:prepend(lazypath)
 --    :Lazy update
 --
 -- NOTE: Here is where you install your plugins.
-require('lazy').setup {
+require('lazy').setup({
   require 'plugins.vim-slueth',
   require 'plugins.comment',
   require 'plugins.gitsigns',
@@ -48,6 +48,14 @@ require('lazy').setup {
   require 'plugins.avante',
   require 'plugins.gh',
   require 'plugins.rainbow-delimiters',
-}
+}, {
+  performance = {
+    rtp = {
+      -- This is true by default, but removes our custom rtp
+      -- which means notes below will fail to load.
+      reset = false,
+    },
+  },
+})
 
 require 'notes'
