@@ -47,7 +47,7 @@ return { -- Autocompletion
         end,
       },
       experimental = {
-        ghost_text = true,
+        ghost_text = false,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
 

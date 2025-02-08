@@ -72,6 +72,7 @@
   system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = false;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
 
   # No hot corners
   system.defaults.dock.wvous-tl-corner = 1;
