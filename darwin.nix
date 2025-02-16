@@ -56,11 +56,10 @@
       "telegram"
       "vlc"
       "zoom"
-      "activitywatch"
       "figma"
       "notion"
-      "soulseek"
       "discord"
+      "ghostty"
     ];
   };
 

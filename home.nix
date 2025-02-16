@@ -20,6 +20,7 @@
     ./modules/alacritty
     ./modules/aws
     ./modules/cli.nix
+    ./modules/ghostty
     ./modules/git
     ./modules/go
     ./modules/karabiner
