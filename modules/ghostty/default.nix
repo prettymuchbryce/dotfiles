@@ -24,9 +24,7 @@ let
     mouse-scroll-multiplier = 3
 
     # Font configuration
-    font-family = FiraCode Nerd Font
-    font-family-bold = FiraCode Nerd Font
-    font-family-italic = FiraCode Nerd Font
+    font-family = FiraCode Nerd Font Mono
     font-style-bold = Bold
     font-style-italic = Italic
     font-size = 16
@@ -40,8 +38,10 @@ let
     background = 1F1F1F
     foreground = D4D4D4
 
-    cursor-color = AEAFAD
-    cursor-text = 1F1F1F
+    # Cursor configuration
+    cursor-style=block
+    cursor-color=#9cdcfe
+    cursor-text=#000000
 
     # Normal colors (palette indices 0-7)
     palette = 0=808080
@@ -69,10 +69,6 @@ let
 
     # Mouse configuration
     mouse-hide-while-typing = false
-
-    # Cursor configuration
-    cursor-style = block
-    cursor-invert-fg-bg = true
 
     # Ensure configuration reloads work
     confirm-close-surface = true

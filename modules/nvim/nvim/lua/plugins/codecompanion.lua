@@ -10,10 +10,30 @@ return {
       chat = {
         adapter = 'anthropic',
       },
+      inline = {
+        adapter = 'anthropic',
+      },
     },
     opts = {
       -- Set debug logging
       log_level = 'DEBUG',
+    },
+  },
+  keys = { -- Add a keybinding for the chat command
+    {
+      '<leader>cc',
+      '<cmd>CodeCompanionChat<CR>',
+      desc = 'Code Companion Chat',
+    },
+    {
+      '<leader>ch',
+      '<cmd>CodeCompanionActions<CR>',
+      desc = 'Code Companion Actions',
+    },
+    {
+      '<leader>co',
+      '<cmd>CodeCompanion<CR>',
+      desc = 'Code Companion',
     },
   },
 }

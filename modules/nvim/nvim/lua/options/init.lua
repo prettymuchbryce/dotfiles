@@ -1,7 +1,9 @@
+vim.opt.background = 'dark'
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false
 vim.opt.undofile = false
+-- Set cursor color and style
 vim.opt.termguicolors = true
 
 -- Set <space> as the leader key

@@ -65,6 +65,9 @@ end
 return {
   'nvim-tree/nvim-tree.lua',
   config = function()
+    -- Get VSCode color palette
+    local c = require('vscode.colors').get_colors()
+
     require('nvim-tree').setup {
       on_attach = on_attach,
       actions = {
@@ -73,14 +76,34 @@ return {
         },
       },
       renderer = {
+        highlight_git = true,
+        highlight_opened_files = 'none',
+        highlight_modified = 'none', -- Don't highlight executables in any special way
         icons = {
           show = {
-            git = true,
+            git = false, -- Don't show git icons, we'll use colors instead
+            file = true,
+            folder = true,
+            folder_arrow = true,
+          },
+          glyphs = {
+            git = {
+              unstaged = '',
+              staged = '',
+              unmerged = '',
+              renamed = '',
+              untracked = '',
+              deleted = '',
+              ignored = '',
+            },
           },
         },
       },
       git = {
         ignore = false,
+        show_on_dirs = true, -- Show git status on directories
+        show_on_open_dirs = true,
+        timeout = 400,
       },
       view = {
         side = 'left',
@@ -90,6 +113,35 @@ return {
         relativenumber = true,
       },
     }
+
+    -- Define all the highlight groups
+    vim.api.nvim_create_autocmd('ColorScheme', {
+      pattern = '*',
+      callback = function()
+        -- Simplified color scheme as requested
+        -- Only green (new files), yellow (modified), and dark gray (ignored)
+
+        -- New files are green
+        vim.api.nvim_set_hl(0, 'NvimTreeGitNew', { fg = c.vscGreen })
+        vim.api.nvim_set_hl(0, 'NvimTreeGitUntracked', { fg = c.vscGreen })
+
+        -- Modified files are yellow (including staged and renamed)
+        vim.api.nvim_set_hl(0, 'NvimTreeGitDirty', { fg = c.vscYellow })
+        vim.api.nvim_set_hl(0, 'NvimTreeGitStaged', { fg = c.vscYellow })
+        vim.api.nvim_set_hl(0, 'NvimTreeGitRenamed', { fg = c.vscYellow })
+        vim.api.nvim_set_hl(0, 'NvimTreeGitMerge', { fg = c.vscYellow })
+
+        -- Deleted files use yellow too for consistency
+        vim.api.nvim_set_hl(0, 'NvimTreeGitDeleted', { fg = c.vscYellow })
+
+        -- Ignored files are dark gray
+        vim.api.nvim_set_hl(0, 'NvimTreeGitIgnored', { fg = c.vscGray })
+      end,
+      group = vim.api.nvim_create_augroup('NvimTreeHighlight', { clear = true }),
+    })
+
+    -- Trigger the autocmd immediately for the current colorscheme
+    vim.cmd 'doautocmd ColorScheme'
 
     -- Open nvimtree by default
     local function open_nvim_tree()

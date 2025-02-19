@@ -17,7 +17,6 @@
 
   imports = [
     ./modules/aerospace
-    ./modules/alacritty
     ./modules/aws
     ./modules/cli.nix
     ./modules/ghostty
@@ -36,7 +35,8 @@
   # environment.
   home.packages = with pkgs; [
     fnm # Fast node version manager
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+    # (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
+    pkgs.nerd-fonts.fira-code
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your

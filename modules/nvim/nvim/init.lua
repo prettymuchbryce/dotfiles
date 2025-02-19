@@ -31,7 +31,7 @@ require('lazy').setup({
   require 'plugins.vim-ai',
   require 'plugins.nvim-lspconfig',
   require 'plugins.conform',
-  -- require 'plugins.copilot-lua',
+  require 'plugins.copilot-lua',
   require 'plugins.nvim-cmp',
   require 'plugins.todo-comments',
   require 'plugins.nvim-tree',
