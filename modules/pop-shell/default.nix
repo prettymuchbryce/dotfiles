@@ -8,7 +8,7 @@
 {
   # Only enable on Linux systems
   config = lib.mkIf pkgs.stdenv.isLinux {
-    programs.dconf.settings = {
+    dconf.settings = {
       # Pop Shell extension settings
       "org/gnome/shell/extensions/pop-shell" = {
         tile-by-default = true;
