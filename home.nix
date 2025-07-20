@@ -32,6 +32,7 @@
     ./modules/spectacle
     ./modules/tmux
     ./modules/gnome
+    ./modules/pop-shell
     ./modules/ulauncher.nix
   ];
 

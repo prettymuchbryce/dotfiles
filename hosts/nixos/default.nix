@@ -93,9 +93,8 @@
     # Application launcher (Raycast alternative)
     ulauncher
     
-    # GNOME extensions for tiling
-    gnomeExtensions.tiling-assistant
-    gnomeExtensions.forge
+    # Pop Shell for tiling window management
+    gnomeExtensions.pop-shell
     
     # Additional applications
     docker
