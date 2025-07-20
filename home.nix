@@ -1,6 +1,6 @@
 # home.nix
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -16,19 +16,28 @@
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
   imports = [
-    ./modules/aerospace
+    # Shared modules (cross-platform)
     ./modules/aws
     ./modules/cli.nix
     ./modules/ghostty
     ./modules/git
     ./modules/go
-    ./modules/karabiner
     ./modules/nvim
     ./modules/programming.nix
-    ./modules/spectacle
-    ./modules/tmux
     ./modules/zellij
     ./modules/zsh
+  ] 
+  # macOS-specific modules
+  ++ lib.optionals pkgs.stdenv.isDarwin [
+    ./modules/aerospace
+    ./modules/karabiner
+    ./modules/spectacle
+    ./modules/tmux
+  ]
+  # Linux-specific modules  
+  ++ lib.optionals pkgs.stdenv.isLinux [
+    ./modules/gnome
+    ./modules/ulauncher.nix
   ];
 
   # The home.packages option allows you to install Nix packages into your

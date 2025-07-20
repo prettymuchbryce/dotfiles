@@ -1,5 +1,5 @@
 {
-  description = "Darwin configuration";
+  description = "Multi-platform Nix configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -18,9 +18,11 @@
       ...
     }:
     {
+      # Darwin (macOS) configuration
       darwinConfigurations."Bryces-MacBook-Pro-2" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         modules = [
-          ./darwin.nix
+          ./hosts/darwin
           home-manager.darwinModules.home-manager
           {
             home-manager = {
@@ -32,7 +34,24 @@
         ];
       };
 
-      # Expose the package set, including overlays, for convenience.
+      # NixOS configuration
+      nixosConfigurations.meerkat = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/nixos
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.bryce.imports = [ ./home.nix ];
+            };
+          }
+        ];
+      };
+
+      # Expose package sets for convenience
       darwinPackages = self.darwinConfigurations."Bryces-MacBook-Pro-2".pkgs;
+      nixosPackages = self.nixosConfigurations.meerkat.pkgs;
     };
 }

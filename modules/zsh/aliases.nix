@@ -1,39 +1,45 @@
 {
+  # Cross-platform aliases
   rl = "source ~/.zshrc";
   nvm = "fnm";
   dotfiles = "vim ~/.dotfiles";
   vimrc = "vim ~/.dotfiles/modules/nvim/nvim";
   etchosts = "sudo vim /etc/hosts";
   prj = "cd ~/projects";
-  nixrb = "darwin-rebuild switch --flake ~/.dotfiles --verbose";
   nixfupdate = "nix flake update";
   tf = "terraform";
   notes = "cd ~/notes && vim ~/notes/README.md -c \":NvimTreeOpen\"";
   staked = "bash ~/scripts/query-staked.sh";
-  claudeeng = "(cd /Users/bryce/projects/claude-engineer && poetry run python main.py)";
 
+  # Platform-aware rebuild commands
+  # macOS: darwin-rebuild, NixOS: nixos-rebuild
+  nixrb = "if [[ \"$(uname)\" == \"Darwin\" ]]; then darwin-rebuild switch --flake ~/.dotfiles --verbose; else sudo nixos-rebuild switch --flake ~/.dotfiles#meerkat --verbose; fi";
+
+  # Docker and development
   open-webui = "docker run -d -p 6671:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main";
 
-  # open current directory in github
+  # Git shortcuts
   ghw = "gh repo view --web";
 
-  # tmux
+  # macOS-specific tmux aliases (only used on macOS now)
   tkill = "tmux kill-server";
   tstart = "tmux start-server";
   mux = "tmuxinator";
 
-  # trendies
+  # Project-specific
   taws = "AWS_PROFILE=trendies aws";
+  claudeeng = "(cd ~/projects/claude-engineer && poetry run python main.py)";
 
+  # Focus/productivity (cross-platform)
   focus = "sudo cp -rf ~/.config/hosts/hosts.focus /etc/hosts";
   unfocus = "sudo cp -rf ~/.config/hosts/hosts.unfocus /etc/hosts";
 
-  # Navigation;
+  # Navigation shortcuts
   ".." = "cd ..";
   "..." = "cd ../..";
   "...." = "cd ../../..";
   "....." = "cd ../../../..";
 
-  # Grep;
+  # Enhanced grep
   grep = "grep --color=auto";
 }

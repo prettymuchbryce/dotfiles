@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 {
   programs.fzf = {
     enable = true;
@@ -35,7 +35,9 @@
 
     profileExtra = ''
       setopt interactivecomments
-      eval "$(/opt/homebrew/bin/brew shellenv)" # homebrew
+      ${lib.optionalString pkgs.stdenv.isDarwin ''
+        eval "$(/opt/homebrew/bin/brew shellenv)" # homebrew on macOS
+      ''}
     '';
 
     initExtraBeforeCompInit = ''
@@ -48,9 +50,12 @@
     '';
   };
 
-  # Add rust bin and local bin to path
+  # Add rust bin and local bin to path (platform-aware)
   home.sessionPath = [
     "$HOME/.cargo/bin"
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
     "/Users/bryce/.local/bin"
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    "/home/bryce/.local/bin"
   ];
 }

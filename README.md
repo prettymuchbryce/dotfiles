@@ -1,8 +1,15 @@
-## Developer Machine Nix Configuration
+## Multi-Platform Nix Configuration
 
-This configuration automatically sets up a fresh Mac to my personal comfy preferences.
+This configuration automatically sets up a fresh Mac or Linux machine to my personal preferences. It supports both macOS (via nix-darwin) and NixOS with shared configuration modules.
 
-### Installation Instructions
+## Platform Support
+
+- **macOS**: Uses nix-darwin with Homebrew for GUI applications
+- **NixOS**: Native NixOS configuration with GNOME desktop environment
+
+## Installation Instructions
+
+### macOS Setup
 
 1. Replace contents of `~/.config/nix-darwin` with this repository.
 1. Install and sync password manager via Mac App Store.
@@ -11,20 +18,55 @@ This configuration automatically sets up a fresh Mac to my personal comfy prefer
 1. Install Nix via [nix-installer](https://github.com/DeterminateSystems/nix-installer).
 1. Install `nix-darwin` via `nix run nix-darwin -- switch --flake ~/.config/nix-darwin`.
 
-### Rebuilding the environment
+### NixOS Setup
 
-`nixrb`
+1. Clone this repository to `~/.dotfiles`:
+   ```bash
+   git clone <your-repo-url> ~/.dotfiles
+   cd ~/.dotfiles
+   ```
 
-### Additional Manual steps
+1. Replace the placeholder hardware configuration:
+   ```bash
+   # Generate your actual hardware configuration
+   sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
+   ```
 
-Unfortunately not everything is automatable with nix-darwin, so there remains some manual steps.
+1. Install and sync password manager.
+1. Download git-crypt key and place in `.git/git-crypt/keys/default`.
 
-* Complete setup of password manager.
-* Install necessary Brave browser extensions.
-* Create a new SSH key for GitHub, etc. These should be per-machine.
-* Add application-specific shortcuts via Preferences -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. This is not possible yet from nix-darwin AFAIK.
-    * Brave tab left/right
+1. Enable flakes in your current NixOS configuration (if not already enabled):
+   ```bash
+   # Add to /etc/nixos/configuration.nix temporarily:
+   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+   sudo nixos-rebuild switch
+   ```
+
+1. Switch to this flake configuration:
+   ```bash
+   sudo nixos-rebuild switch --flake ~/.dotfiles#meerkat
+   ```
+
+## Rebuilding the Environment
+
+The `nixrb` alias works on both platforms:
+- **macOS**: `darwin-rebuild switch --flake ~/.dotfiles --verbose`
+- **NixOS**: `sudo nixos-rebuild switch --flake ~/.dotfiles#meerkat --verbose`
+
+Just run: `nixrb`
+
+### Both Platforms
+* Complete setup of password manager
+* Install necessary Brave browser extensions
+* Create SSH keys for GitHub (per-machine)
 * Follow secret steps in `./.secrets/README.md`
+
+### macOS-specific
+* Add application-specific shortcuts via System Preferences → Keyboard → App Shortcuts
+
+### NixOS-specific
+* Configure GNOME settings that aren't covered by dconf (if any)
+* Set up any additional GNOME extensions through Extensions app
 
 ### Resources
 
