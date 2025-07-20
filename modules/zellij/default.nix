@@ -2,6 +2,7 @@
 {
   programs.zellij = {
     enable = true;
+    enableZshIntegration = false;
   };
 
   # Zellij configuration file in KDL format

@@ -49,6 +49,8 @@ require('lazy').setup({
   require 'plugins.rainbow-delimiters',
   require 'plugins.vim-dadbod-ui',
   require 'plugins.codecompanion',
+  require 'plugins.vim-gnupg',
+  require 'plugins.hardtime',
 }, {
   performance = {
     rtp = {

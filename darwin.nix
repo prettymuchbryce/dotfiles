@@ -39,7 +39,6 @@
       "audacity"
       "brave-browser"
       "docker"
-      "iterm2"
       "karabiner-elements"
       "nikitabobko/tap/aerospace"
       "ollama"

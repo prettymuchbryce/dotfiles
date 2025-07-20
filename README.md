@@ -19,7 +19,6 @@ This configuration automatically sets up a fresh Mac to my personal comfy prefer
 
 Unfortunately not everything is automatable with nix-darwin, so there remains some manual steps.
 
-* Follow instructions in modules/iterm2/README.md (TODO: Automate this).
 * Complete setup of password manager.
 * Install necessary Brave browser extensions.
 * Create a new SSH key for GitHub, etc. These should be per-machine.

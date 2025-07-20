@@ -27,7 +27,6 @@
     # yarn
     # nodePackages.prettier
 
-    # lua
     lua
 
     # python
@@ -63,5 +62,8 @@
 
     # terraform
     tenv
+
+    # Image Magick
+    imagemagick
   ];
 }
