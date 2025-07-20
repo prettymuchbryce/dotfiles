@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     awslogs
@@ -23,12 +23,12 @@
   services.gpg-agent = {
     enable = true;
 
-    # Disable SSH support to avoid conflicts with macOS SSH agent
-    enableSshSupport = false;
+    # Platform-specific SSH support settings
+    enableSshSupport = lib.mkDefault (!pkgs.stdenv.isDarwin); # Enable on Linux, disable on macOS to avoid conflicts
     enableExtraSocket = true;
 
-    # Set pinentry package to pinentry-mac
-    pinentryPackage = pkgs.pinentry_mac;
+    # Set pinentry package based on platform
+    pinentryPackage = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gtk2;
 
     # Cache TTL settings
     defaultCacheTtl = 3600; # 1 hour

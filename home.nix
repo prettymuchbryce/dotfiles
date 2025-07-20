@@ -26,16 +26,11 @@
     ./modules/programming.nix
     ./modules/zellij
     ./modules/zsh
-  ] 
-  # macOS-specific modules
-  ++ lib.optionals pkgs.stdenv.isDarwin [
+    # Platform-specific modules (each module handles its own platform detection)
     ./modules/aerospace
     ./modules/karabiner
     ./modules/spectacle
     ./modules/tmux
-  ]
-  # Linux-specific modules  
-  ++ lib.optionals pkgs.stdenv.isLinux [
     ./modules/gnome
     ./modules/ulauncher.nix
   ];

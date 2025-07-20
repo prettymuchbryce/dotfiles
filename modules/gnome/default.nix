@@ -110,11 +110,8 @@
       };
     };
 
-    # Install GNOME extensions
-    home.packages = with pkgs; [
-      # Application launcher (Raycast alternative)
-      ulauncher
-
+    # Install GNOME extensions and tools
+    home.packages = with pkgs; [      
       # GNOME extensions for enhanced window tiling
       gnomeExtensions.tiling-assistant
       gnomeExtensions.forge

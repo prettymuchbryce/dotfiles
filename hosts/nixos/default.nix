@@ -36,7 +36,7 @@
     enable = true;
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    videoDrivers = [ "intel" ];
+    videoDrivers = [ "modesetting" ]; # Modern replacement for intel driver
     xkb = {
       layout = "us";
       variant = "";

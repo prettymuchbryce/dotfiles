@@ -1,4 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  home.file.".config/karabiner".source = ./config;
+  # Only configure Karabiner on macOS
+  config = lib.mkIf pkgs.stdenv.isDarwin {
+    home.file.".config/karabiner".source = ./config;
+  };
 }

@@ -1,6 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
-  programs.tmux = {
+  # Only configure tmux on macOS (per your requirements)
+  config = lib.mkIf pkgs.stdenv.isDarwin {
+    programs.tmux = {
     enable = true;
     terminal = "screen-256color";
     shell = "${pkgs.zsh}/bin/zsh";
@@ -108,11 +110,12 @@
       tmuxPlugins.open
       (callPackage ./tmux-colortag.nix { })
     ];
-  };
+    };
 
-  # Tmux configs
-  home.file.".config/tmuxinator" = {
-    source = ./tmuxinator;
-    recursive = true;
+    # Tmux configs
+    home.file.".config/tmuxinator" = {
+      source = ./tmuxinator;
+      recursive = true;
+    };
   };
 }
