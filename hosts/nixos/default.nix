@@ -47,11 +47,15 @@
   users.users.bryce = {
     isNormalUser = true;
     description = "bryce";
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
   };
+
+  # Shell configuration
+  programs.zsh.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -64,9 +68,9 @@
         ids = [ "*" ];
         settings = {
           main = {
+            home = "C-S-A";
             leftshift = "leftcontrol";
             capslock = "overload(shift, esc)";
-            home = "C-A-S";
             "\\" = "=";
             "=" = "'";
             "'" = "\\";
@@ -83,19 +87,19 @@
     vim
     neovim
     git
-    
+
     # Terminal and shell
     ghostty
-    
+
     # Web browser
     brave
-    
+
     # Application launcher (Raycast alternative)
     ulauncher
-    
+
     # Pop Shell for tiling window management
     gnomeExtensions.pop-shell
-    
+
     # Additional applications
     docker
     signal-desktop
@@ -105,9 +109,12 @@
     vlc
     zoom-us
     discord
-    
+
     # Development tools
     ollama
+
+    # Clipboard
+    wl-clipboard
   ];
 
   # Docker
@@ -115,7 +122,10 @@
   users.extraGroups.docker.members = [ "bryce" ];
 
   # Enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # System version
   system.stateVersion = "25.05";

@@ -1,52 +1,35 @@
 # Ulauncher configuration (Raycast alternative for Linux)
 
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 
+let
+  # Minimal configuration - just hotkey and theme
+  settingsJson = builtins.toJSON {
+    "hotkey-show-app" = "<Super>a";
+    "theme-name" = "dark";
+  };
+in
 {
   # Only configure Ulauncher on Linux systems
   config = lib.mkIf pkgs.stdenv.isLinux {
     home.packages = [ pkgs.ulauncher ];
 
-    # Ulauncher configuration
-    home.file.".config/ulauncher/settings.json".text = builtins.toJSON {
-      "blacklisted-desktop-dirs" = "/usr/share/locale:/usr/share/app-install:/usr/share/kservices5:/usr/share/fk5";
-      "clear-previous-query" = true;
-      "hotkey-show-app" = "<Super>space";
-      "render-on-screen" = "mouse-pointer-monitor";
-      "show-indicator-icon" = true;
-      "show-recent-apps" = "3";
-      "terminal-command" = "ghostty";
-      "theme-name" = "dark";
-      "disable-desktop-filters" = false;
-    };
+    # Minimal activation script - only set hotkey and theme
+    home.activation.ulauncher = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      # Create ulauncher config directory
+      mkdir -p ~/.config/ulauncher
 
-    # Ulauncher shortcuts configuration
-    home.file.".config/ulauncher/shortcuts.json".text = builtins.toJSON {
-      "shortcuts" = {
-        # Quick shortcuts similar to Raycast
-        "g" = {
-          "added" = 1640995200;
-          "cmd" = "https://google.com/search?q=%s";
-          "is_default_search" = true;
-          "keyword" = "g";
-          "name" = "Google Search";
-        };
-        "gh" = {
-          "added" = 1640995200;
-          "cmd" = "https://github.com/search?q=%s";
-          "is_default_search" = false;
-          "keyword" = "gh";
-          "name" = "GitHub Search";
-        };
-        "calc" = {
-          "added" = 1640995200;
-          "cmd" = "python3 -c \"print(%s)\"";
-          "is_default_search" = false;
-          "keyword" = "calc";
-          "name" = "Calculator";
-        };
-      };
-    };
+      # Only create initial config if files don't exist or are symlinks
+      if [ ! -f ~/.config/ulauncher/settings.json ] || [ -L ~/.config/ulauncher/settings.json ]; then
+        rm -f ~/.config/ulauncher/settings.json
+        echo '${settingsJson}' > ~/.config/ulauncher/settings.json
+      fi
+    '';
 
     # Enable autostart for Ulauncher
     home.file.".config/autostart/ulauncher.desktop".text = ''

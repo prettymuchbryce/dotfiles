@@ -20,7 +20,7 @@ let
     macos-option-as-alt = true
 
     # Scrollback configuration
-    scrollback-limit = 10000
+    scrollback-limit = 100000
     mouse-scroll-multiplier = 3
 
     # Font configuration

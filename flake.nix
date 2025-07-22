@@ -7,6 +7,7 @@
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    claude-code.url = "github:sadjow/claude-code-nix";
   };
 
   outputs =
@@ -15,6 +16,7 @@
       nix-darwin,
       nixpkgs,
       home-manager,
+      claude-code,
       ...
     }:
     {
@@ -47,6 +49,17 @@
               users.bryce.imports = [ ./home.nix ];
             };
           }
+        ];
+      };
+
+      # Claude Code
+      homeConfigurations."bryce" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux"; # adjust for your system
+          overlays = [ claude-code.overlays.default ];
+        };
+        modules = [
+          ./home.nix
         ];
       };
 

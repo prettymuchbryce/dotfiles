@@ -1,6 +1,11 @@
 # home.nix
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -34,6 +39,7 @@
     ./modules/gnome
     ./modules/pop-shell
     ./modules/ulauncher.nix
+    ./modules/claude-code
   ];
 
   # The home.packages option allows you to install Nix packages into your
