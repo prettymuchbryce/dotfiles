@@ -248,7 +248,7 @@
     //   - true (default)
     //   - false
     //
-    // pane_frames true
+    pane_frames false
 
     // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
     // Options:
@@ -284,26 +284,26 @@
     // For more examples, see: https://github.com/zellij-org/zellij/tree/main/example/themes
     // Once these themes are defined, one of them should to be selected in the "theme" section of this file
     //
-    // themes {
-    //     dracula {
-    //         fg 248 248 242
-    //         bg 40 42 54
-    //         red 255 85 85
-    //         green 80 250 123
-    //         yellow 241 250 140
-    //         blue 98 114 164
-    //         magenta 255 121 198
-    //         orange 255 184 108
-    //         cyan 139 233 253
-    //         black 0 0 0
-    //         white 255 255 255
-    //     }
-    // }
+    themes {
+        vscode_dark {
+            fg 255 255 255        // colors.fg = '#ffffff'
+            bg 38 38 38           // colors.bg = '#262626'
+            black 38 38 38        // colors.bg = '#262626'
+            red 244 71 71         // colors.red = '#f44747'
+            green 87 156 214      // colors.blue = '#569cd6'
+            yellow 255 175 0      // colors.yellow = '#ffaf00'
+            blue 10 122 202       // colors.blue = '#0a7aca'
+            magenta 221 182 242   // colors.pink = '#DDB6F2'
+            cyan 92 182 248       // colors.lightblue = '#5CB6F8'
+            white 255 255 255     // colors.fg = '#ffffff'
+            orange 255 175 0      // colors.yellow = '#ffaf00' (using yellow for orange)
+        }
+    }
 
     // Choose the theme that is specified in the themes section.
     // Default: default
     //
-    // theme "default"
+    theme "vscode_dark"
 
     // The name of the default layout to load on startup
     // Default: "default"

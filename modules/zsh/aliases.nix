@@ -13,7 +13,7 @@
 
   # Platform-aware rebuild commands
   # macOS: darwin-rebuild, NixOS: nixos-rebuild
-  nixrb = "if [[ \"$(uname)\" == \"Darwin\" ]]; then darwin-rebuild switch --flake ~/.dotfiles --verbose; else sudo nixos-rebuild switch --flake ~/.dotfiles#meerkat --verbose; fi";
+  nixrb = "if [[ \"$(uname)\" == \"Darwin\" ]]; then darwin-rebuild switch --flake ~/.dotfiles --verbose; else sudo nixos-rebuild switch --flake ~/.dotfiles\\#meerkat --verbose; fi";
 
   # Docker and development
   open-webui = "docker run -d -p 6671:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main";

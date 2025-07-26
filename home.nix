@@ -36,9 +36,7 @@
     ./modules/karabiner
     ./modules/spectacle
     ./modules/tmux
-    ./modules/gnome
-    ./modules/pop-shell
-    ./modules/ulauncher.nix
+    ./modules/hyprland
     ./modules/claude-code
   ];
 

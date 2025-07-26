@@ -16,6 +16,9 @@
   networking.hostName = "meerkat";
   networking.networkmanager.enable = true;
 
+  # Enable nix-ld for dynamic executables (like fnm-installed Node.js)
+  programs.nix-ld.enable = true;
+
   # Localization
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -31,16 +34,39 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # X11 and GNOME
+  # Wayland and Hyprland
   services.xserver = {
     enable = true;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = true;
     videoDrivers = [ "modesetting" ]; # Modern replacement for intel driver
     xkb = {
       layout = "us";
       variant = "";
     };
+  };
+
+  # Enable Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  # ly Display Manager (minimal TUI)
+  services.displayManager.ly = {
+    enable = true;
+    settings = {
+      default_input = 2;  # Auto-select password field (username is pre-filled)
+      save = true;        # Save username and session
+      load = true;        # Load saved username and session
+    };
+  };
+  
+  # Set default session to Hyprland
+  services.displayManager.defaultSession = "hyprland";
+
+  # XDG Desktop Portal
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
 
   # User account
@@ -75,6 +101,12 @@
             "=" = "'";
             "'" = "\\";
             rightshift = "'";
+            # Mac-style copy/paste shortcuts
+            meta = "layer(meta)";
+          };
+          meta = {
+            c = "C-c";  # Super+C -> Ctrl+C (copy)
+            v = "C-v";  # Super+V -> Ctrl+V (paste)
           };
         };
       };
@@ -87,6 +119,7 @@
     vim
     neovim
     git
+    unzip # Required by Mason for extracting packages
 
     # Terminal and shell
     ghostty
@@ -94,11 +127,11 @@
     # Web browser
     brave
 
-    # Application launcher (Raycast alternative)
-    ulauncher
-
-    # Pop Shell for tiling window management
-    gnomeExtensions.pop-shell
+    # Wayland/Hyprland essentials  
+    waybar
+    wofi
+    wlogout
+    pavucontrol # Audio control
 
     # Additional applications
     docker
@@ -115,7 +148,19 @@
 
     # Clipboard
     wl-clipboard
+
+    # Cursor theme
+    bibata-cursors
   ];
+
+  # Audio
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Docker
   virtualisation.docker.enable = true;
