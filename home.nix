@@ -1,80 +1,95 @@
-# home.nix
-
-{ config, pkgs, ... }:
-
 {
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.05"; # Please read the comment before changing.
-
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  format = pkgs.formats.json { };
+in
+{
   imports = [
-    ./modules/aerospace
-    ./modules/aws
-    ./modules/cli.nix
-    ./modules/ghostty
-    ./modules/git
-    ./modules/go
-    ./modules/karabiner
-    ./modules/nvim
-    ./modules/programming.nix
-    ./modules/spectacle
-    ./modules/tmux
-    ./modules/zellij
-    ./modules/zsh
+    # Shared modules (cross-platform)
+    ./modules/home/aws.nix
+    ./modules/home/cli.nix
+    ./modules/home/ghostty.nix
+    ./modules/home/git.nix
+    ./modules/home/go.nix
+    ./modules/home/nvim
+    ./modules/home/zellij.nix
+    ./modules/home/zsh
+    ./modules/home/fnm.nix
+    # Platform-specific modules
+    ./modules/home/aerospace
+    ./modules/home/karabiner
+    ./modules/home/hyprland
+    ./modules/home/claude-code.nix
+    ./modules/home/mako.nix
+    ./modules/home/codex.nix
   ];
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
-    fnm # Fast node version manager
-    # (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
-    pkgs.nerd-fonts.fira-code
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  ];
-
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+  # Option for simple OpenSnitch rules (consistent with system modules)
+  options.opensnitchRules = lib.mkOption {
+    type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
+    default = [ ];
+    description = "Simple OpenSnitch rules that will be converted to verbose format automatically";
+    example = [
+      {
+        name = "Allow SSH to GitHub";
+        process = "/usr/bin/ssh";
+        port = 22;
+        host = "github.com";
+        protocol = "tcp";
+      }
+    ];
   };
 
-  # You can also manage environment variables but you will have to manually
-  # source
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/bryce/etc/profile.d/hm-session-vars.sh
-  #
-  # if you don't want to manage your shell through Home Manager.
-  home.sessionVariables = {
-    NIX_PATH = "$NIX_PATH:nixpkgs=https://github.com/NixOS/nixpkgs/archive/nixpkgs-unstable.tar.gz";
+  options.persistenceDirectories = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+    description = ''
+      User directories to persist (relative to home directory).
+      These will be collected by the system persistence module.
+    '';
   };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  options.persistenceFiles = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [ ];
+    description = ''
+      User files to persist (relative to home directory).  
+      These will be collected by the system persistence module.
+    '';
+  };
+
+  config = {
+    targets.darwin.linkApps.enable = lib.mkIf pkgs.stdenv.isDarwin true;
+    targets.darwin.linkApps.directory = "Applications";
+
+    programs.home-manager.enable = true;
+
+    home.packages =
+      with pkgs;
+      [
+        pkgs.nerd-fonts.fira-code
+        pkgs.nerd-fonts.jetbrains-mono
+      ]
+      ++ lib.optionals pkgs.stdenv.isLinux [
+        gcc # C compiler for neovim plugins
+      ];
+
+    # XDG configuration for Flatpak desktop integration
+    xdg.systemDirs.data = lib.optionals pkgs.stdenv.isLinux [
+      "/var/lib/flatpak/exports/share"
+    ];
+
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    home.stateVersion = "23.05"; # Please read the comment before changing.
+  };
 }

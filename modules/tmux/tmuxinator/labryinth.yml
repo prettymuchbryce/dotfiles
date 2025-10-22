@@ -1,8 +1,0 @@
----
-name: labryinth
-root: ~/projects/infinite-labryinth
-windows:
-  - server: [cd server, npm run dev]
-  - client: [cd client, npm run dev]
-  - vim: [vim .]
-  - misc_term: [ls -la]

@@ -1,0 +1,75 @@
+{ pkgs, lib, ... }:
+{
+  home.packages = with pkgs; [
+    # utilities
+    gnumake
+    libiconv
+    ripgrep
+    jq
+    unrar
+    ffmpeg
+    imagemagick
+
+    # python
+    (python3.withPackages (
+      ps: with ps; [
+        setuptools
+        pip
+        openai
+        simple-http-server
+        pipx
+      ]
+    ))
+    poetry
+
+    # nix
+    nixfmt-rfc-style
+
+    # app dev
+    awslogs
+    git-crypt
+    solana-cli
+    lua
+    rustup
+    shfmt
+    yamlfix
+    tenv
+  ];
+
+  programs.gpg = {
+    enable = true;
+  };
+
+  services.gpg-agent = {
+    enable = true;
+
+    enableSshSupport = false;
+    enableExtraSocket = true;
+
+    # Set pinentry package based on platform
+    pinentry.package = if pkgs.stdenv.isDarwin then pkgs.pinentry_mac else pkgs.pinentry-gtk2;
+
+    # Cache TTL settings
+    defaultCacheTtl = 3600; # 1 hour
+    maxCacheTtl = 86400; # 24 hours
+
+    extraConfig = ''
+      allow-loopback-pinentry
+      allow-preset-passphrase
+    '';
+  };
+
+  programs.mods = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+}

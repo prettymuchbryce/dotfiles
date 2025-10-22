@@ -1,37 +1,45 @@
-## Developer Machine Nix Configuration
+## dotfiles
 
-This configuration automatically sets up a fresh Mac to my personal comfy preferences.
+This configuration automatically sets up a fresh Mac or Linux machine to my personal preferences. It supports both macOS (via nix-darwin) and NixOS.
 
-### Installation Instructions
+### nix-darwin setup
 
-1. Replace contents of `~/.config/nix-darwin` with this repository.
-1. Install and sync password manager via Mac App Store.
-1. Download git-crypt key and place in `.git/git-crypt/keys/default`.
-1. Install [Homebrew](https://brew.sh).
-1. Install Nix via [nix-installer](https://github.com/DeterminateSystems/nix-installer).
-1. Install `nix-darwin` via `nix run nix-darwin -- switch --flake ~/.config/nix-darwin`.
+1. **Prerequisites**:
+   - Install [Homebrew](https://brew.sh)
+   - Install git-crypt: `brew install git-crypt`
+   - Install Nix via [nix-installer](https://github.com/DeterminateSystems/nix-installer).
+      - To install the **recommended** vanilla upstream [Nix](https://nixos.org), you will need to explicitly say `no` when prompted to install `Determinate Nix`.
+      - Do not use the `--determinate` flag, as it will install the [Determinate](https://docs.determinate.systems/) distribution. By using the determinate distrubtion some nix-darwin functionality that relies on managing the Nix installation, like the `nix.*` options to adjust Nix settings or configure a Linux builder, will be unavailable.
+1. Replace contents of `~/.dotfiles` with this repository.
+1. Download git-crypt key and move it to `.git/git-crypt/keys/default`.
+1. Run `git-crypt unlock .git/git-crypt/keys/default`.
+1. Install nix-darwin via `sudo -i nix run nix-darwin -- switch --flake ~/.dotfiles`.
 
-### Rebuilding the environment
+### NixOS setup
 
-`nixrb`
+1. **Prerequisites**:
+   - Temporarily install git-crypt and git via `nix-shell -p git-crypt git`.
+1. Replace contents of `~/.dotfiles` with this repository.
+1. Download git-crypt key and move it to `/.git/git-crypt/keys/default`.
+1. Run `git-crypt unlock .git/git-crypt/keys/default`.
+1. Run `sudo nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix` to generate hardware configuration.
 
-### Additional Manual steps
+### Rebuilding the Environment
 
-Unfortunately not everything is automatable with nix-darwin, so there remains some manual steps.
+Just run the alias: `nixrb`
 
-* Complete setup of password manager.
-* Install necessary Brave browser extensions.
-* Create a new SSH key for GitHub, etc. These should be per-machine.
-* Add application-specific shortcuts via Preferences -> Keyboard -> Keyboard Shortcuts -> App Shortcuts. This is not possible yet from nix-darwin AFAIK.
-    * Brave tab left/right
-* Follow secret steps in `./.secrets/README.md`
+### Manual tasks
+- Setup of password manager.
+- Create a new SSH key for GitHub, etc. These should be per-machine.
+- MacOS settings which aren't supported in nix-darwin
+   - Notification Center -> Show previews -> Never
+   - Notification Center -> Disable "when display is sleeping"
 
 ### Resources
-
 - https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236
 - https://davi.sh/til/nix/nix-macos-setup/
 - https://blog.6nok.org/how-i-use-nix-on-macos/
-- https://github.com/LnL7/nix-darwin
+- https://github.com/nix-darwin/nix-darwin
 - https://github.com/nix-community/home-manager
 - https://github.com/nixypanda/dotfiles
 - https://github.com/kubukoz/nix-config/tree/main

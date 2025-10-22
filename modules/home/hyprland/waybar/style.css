@@ -1,0 +1,49 @@
+@define-color foreground #eeeeee;
+@define-color foreground-inactive #aaaaaa;
+@define-color background #000000;
+
+* {
+    font-family: SFProDisplay Nerd Font;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
+
+#waybar {
+    color: @foreground;
+    background-color: @background;
+}
+
+/* Ensure the container itself isn't adding space */
+#workspaces {
+  padding: 0;
+  margin: 0;
+}
+
+#workspaces button {
+  margin: 0;
+  padding: 0 8px;       /* keep some horizontal padding if you like */
+  min-height: 0;        /* kill the 26px theme min-height */
+  border: 0;
+  border-radius: 0;
+  color: @foreground;
+  padding-left: 0.7em;
+}
+
+#workspaces button.empty {
+    color: @foreground-inactive;
+}
+
+#memory,
+#custom-platform-profile {
+    padding-left: 1em
+}
+
+#wireplumber,
+#battery,
+#network,
+#clock,
+#tray {
+    padding-right: 1em 
+}

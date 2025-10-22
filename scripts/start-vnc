@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Script to create headless display and start wayvnc
+# Usage: ./start-vnc
+
+set -e
+
+echo "Creating headless display HEADLESS-2..."
+hyprctl output create headless HEADLESS-2
+
+echo "Waiting for display to initialize..."
+sleep 2
+
+hyprctl keyword monitor HEADLESS-2,1920x1080@60,auto,1
+echo "Use monitor keyword to set resolution"
+
+echo "Starting wayvnc service..."
+systemctl --user start wayvnc
+
+echo "Checking wayvnc status..."
+systemctl --user status wayvnc --no-pager
+
+echo ""
+echo "VNC server should now be available on port 5900"
+echo "To stop: systemctl --user stop wayvnc && hyprctl output remove HEADLESS-2"

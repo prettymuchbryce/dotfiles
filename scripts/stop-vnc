@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Script to stop wayvnc and remove headless display
+# Usage: ./stop-vnc
+
+set -e
+
+echo "Stopping wayvnc service..."
+systemctl --user stop wayvnc || echo "wayvnc was not running"
+
+echo "Removing headless display HEADLESS-2..."
+hyprctl output remove HEADLESS-2 || echo "HEADLESS-2 was not found"
+
+echo "VNC server stopped and headless display removed."

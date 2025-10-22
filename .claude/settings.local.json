@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ss:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(echo:*)",
+      "Bash(ls:*)",
+      "Bash(gsettings get:*)",
+      "Bash(mv:*)",
+      "Bash(nix-instantiate:*)",
+      "Read(//home/bryce/.local/share/nvim/lazy/**)",
+      "WebSearch",
+      "Bash(systemctl status:*)",
+      "WebFetch(domain:search.nixos.org)",
+      "Bash(nix search:*)"
+    ],
+    "deny": [
+      "Read(.secrets)"
+    ]
+  }
+}
