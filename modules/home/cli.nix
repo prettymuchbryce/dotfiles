@@ -32,8 +32,13 @@
     lua
     rustup
     shfmt
-    yamlfix
     tenv
+
+    # Click 8.2.0 introduced changes which broke many packages.
+    # So avoid running the tests for now.
+    (python3Packages.yamlfix.overridePythonAttrs (_: {
+      doCheck = false;
+    }))
   ];
 
   programs.gpg = {
