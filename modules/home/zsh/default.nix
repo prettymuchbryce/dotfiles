@@ -34,6 +34,8 @@
     shellAliases = import ./aliases.nix;
     history.extended = true;
 
+    # Content for login shells only.
+    # Runs before ~/.zshrc.
     profileExtra = ''
       setopt interactivecomments
       ${lib.optionalString pkgs.stdenv.isDarwin ''
@@ -41,6 +43,7 @@
       ''}
     '';
 
+    # Modifies ~/.zshrc content for all zsh shells.
     initContent = lib.mkOrder 550 ''
       ${builtins.readFile ./session_variables.zsh}
       ${builtins.readFile ./functions.zsh}

@@ -86,4 +86,8 @@
   # Key Repeat
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 15;
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
+
+  # Trackpad
+  system.defaults.trackpad.Clicking = true; # Tap to click
+  system.defaults.trackpad.TrackpadRightClick = true; # Right click
 }

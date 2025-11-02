@@ -7,3 +7,5 @@ Your task is to help improve these configurations (as instructed by the user). A
 Any change you make should _only_ impact the current system. If a change you make would impact the other system, you should first warn the user and ask for their permission to make the change.
 
 You should always make changes to these configurations in the most idiomatic way possible. Please reference other configuration repositories on GitHub to learn more about how other users have structured their configurations for various software when searching for solutions to a common problem.
+
+When referencing nix-darwin options consult this page: https://nix-darwin.github.io/nix-darwin/manual/

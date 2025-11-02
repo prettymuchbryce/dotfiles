@@ -86,16 +86,26 @@ in
       echo "Setting up Brave browser policies..." >&2
       set -euo pipefail
 
-      install -d -m 755 -o root -g wheel "/Library/Managed Preferences"
-      cat > "/Library/Managed Preferences/com.brave.Browser.plist" <<'EOF'
+      target="/Library/Managed Preferences/com.brave.Browser.plist"
+      dir="$(dirname "$target")"
+      install -d -m 755 -o root -g wheel "$dir"
+
+      # Write to a temp file on the SAME filesystem/dir for atomic rename
+      tmp="$(mktemp "$target.tmp.XXXXXX")"
+
+      # Populate temp file (no truncation of the target)
+      cat > "$tmp" <<'EOF'
       ${macOSPolicyContent}
       EOF
-      chown root:wheel "/Library/Managed Preferences/com.brave.Browser.plist"
-      chmod 644 "/Library/Managed Preferences/com.brave.Browser.plist"
 
-      # Refresh caches; Brave reads policies on launch
-      # /usr/bin/killall cfprefsd >/dev/null 2>&1 || true
-      # /usr/bin/osascript -e 'tell application "Brave Browser" to quit' >/dev/null 2>&1 || true
+      # Validate plist before we touch the real file
+      /usr/bin/plutil -lint "$tmp"
+
+      # Set perms on the temp first
+      chown root:wheel "$tmp"
+      chmod 0644 "$tmp"
+
+      mv -f "$tmp" "$target"
     '';
   };
 }
