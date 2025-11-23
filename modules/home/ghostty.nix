@@ -32,7 +32,7 @@ let
     font-thicken-strength = 1
 
     # Updates
-    auto-update = check
+    auto-update = off
 
     # Color configuration
     background = 1F1F1F

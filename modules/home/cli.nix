@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, pkgs-solana, lib, ... }:
 {
   home.packages = with pkgs; [
     # utilities
@@ -11,16 +11,15 @@
     imagemagick
 
     # python
+    uv
     (python3.withPackages (
       ps: with ps; [
         setuptools
         pip
         openai
-        simple-http-server
         pipx
       ]
     ))
-    poetry
 
     # nix
     nixfmt-rfc-style
@@ -28,7 +27,7 @@
     # app dev
     awslogs
     git-crypt
-    solana-cli
+    pkgs-solana.solana-cli  # Use older version from nixos-24.11
     lua
     rustup
     shfmt

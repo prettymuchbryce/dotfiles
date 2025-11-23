@@ -20,6 +20,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Override fish to skip tests (they fail on macOS)
+  nixpkgs.overlays = [
+    (final: prev: {
+      fish = prev.fish.overrideAttrs (oldAttrs: {
+        doCheck = false;
+      });
+    })
+  ];
+
   system.primaryUser = "bryce";
 
   users.users.bryce = {
@@ -90,4 +99,7 @@
   # Trackpad
   system.defaults.trackpad.Clicking = true; # Tap to click
   system.defaults.trackpad.TrackpadRightClick = true; # Right click
+  system.defaults.NSGlobalDomain."com.apple.mouse.tapBehavior" = 1;
+  system.defaults.trackpad.FirstClickThreshold = 0; # Light
+  system.defaults.trackpad.TrackpadCornerSecondaryClick = 2;
 }

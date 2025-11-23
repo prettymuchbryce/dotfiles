@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Older nixpkgs for packages with build issues on latest
+    nixpkgs-solana.url = "github:NixOS/nixpkgs/nixos-24.11";
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
@@ -21,6 +23,7 @@
       self,
       nix-darwin,
       nixpkgs,
+      nixpkgs-solana,
       home-manager,
       claude-code,
       nix-flatpak,
@@ -45,6 +48,10 @@
                 {
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;
+                  _module.args.pkgs-solana = import nixpkgs-solana {
+                    system = "aarch64-darwin";
+                    config.allowUnfree = true;
+                  };
                 }
               ];
             };

@@ -10,6 +10,8 @@ let
   extSpecPath = "${flakeRoot}/.secrets/brave-extensions.nix";
   extSpecs = import extSpecPath; # [ { id = "..."; pin = true; } ... ]
 
+  dnsServers = import "${flakeRoot}/.secrets/brave-secure-dns.nix";
+
   webstore = "https://clients2.google.com/service/update2/crx";
 
   mkExtensionXML =
@@ -49,8 +51,15 @@ let
       <!-- Disable Chromium UMA (usage/crash metrics) -->
       <key>MetricsReportingEnabled</key><false/>
 
+      <!-- Disable update checks and prompts -->
+      <key>UpdatesSuppressed</key><true/>
+
       <!-- Set Brave as default browser -->
       <key>DefaultBrowserSettingEnabled</key><true/>
+
+      <!-- Enable secure DNS with Mullvad -->
+      <key>DnsOverHttpsMode</key><string>secure</string>
+      <key>DnsOverHttpsTemplates</key><string>${dnsServers}</string>
 
       <!-- Manage extensions via ExtensionSettings -->
       <key>ExtensionSettings</key>
