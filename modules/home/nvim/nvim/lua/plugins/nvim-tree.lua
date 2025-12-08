@@ -147,6 +147,11 @@ return {
     local function open_nvim_tree()
       -- open the tree
       require('nvim-tree.api').tree.open()
+      -- Move cursor to the file window only if a file was opened
+      local file = vim.fn.expand('%:p')
+      if file ~= '' and vim.fn.isdirectory(file) == 0 then
+        vim.cmd('wincmd l')
+      end
     end
     vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
 

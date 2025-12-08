@@ -31,9 +31,10 @@ Just run the alias: `nixrb`
 ### Manual tasks
 - Setup of password manager.
 - Create a new SSH key for GitHub, etc. These should be per-machine.
-- MacOS settings which aren't supported in nix-darwin
+- MacOS settings which aren't yet supported in nix-darwin
    - Notification Center -> Show previews -> Never
    - Notification Center -> Disable "when display is sleeping"
+   - Set "Apple Intelligence Report" Duration to "Off"
 
 ### Resources
 - https://medium.com/@zmre/nix-darwin-quick-tip-activate-your-preferences-f69942a93236

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+if [ "$#" -ne 1 ]; then
+	echo "uppies: Move a directory's contents up one level and remove the directory." >&2
+	echo "Usage: uppies <directory>" >&2
+	exit 1
+fi
+
+dir="$1"
+
+if [ ! -d "$dir" ]; then
+	echo "Error: '$dir' is not a directory." >&2
+	exit 1
+fi
+
+# Move contents up one level
+mv "$dir"/* "$dir"/.[!.]* . 2>/dev/null || true
+
+# Remove the now-empty directory
+rmdir "$dir"

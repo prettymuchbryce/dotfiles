@@ -28,4 +28,7 @@
   # VNC control (Linux only)
   start-vnc = "~/.dotfiles/scripts/start-vnc";
   stop-vnc = "~/.dotfiles/scripts/stop-vnc";
+
+  # Claude code
+  claudeyolo = "claude --dangerously-skip-permissions";
 }

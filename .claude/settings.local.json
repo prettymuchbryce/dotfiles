@@ -11,11 +11,14 @@
       "Read(//home/bryce/.local/share/nvim/lazy/**)",
       "WebSearch",
       "Bash(systemctl status:*)",
-      "Bash(nix search:*)"
+      "Bash(nix search:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(curl:*)",
+      "WebFetch(domain:organize.readthedocs.io)"
     ],
     "deny": [
       "Read(.secrets)"
     ]
   }
 }
-

@@ -1,4 +1,4 @@
-{ pkgs, pkgs-solana, lib, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     # utilities
@@ -9,6 +9,9 @@
     unrar
     ffmpeg
     imagemagick
+    llvm
+    lld
+    mold
 
     # python
     uv
@@ -27,9 +30,8 @@
     # app dev
     awslogs
     git-crypt
-    pkgs-solana.solana-cli  # Use older version from nixos-24.11
     lua
-    rustup
+
     shfmt
     tenv
 

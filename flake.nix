@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
+    try.url = "github:tobi/try";
   };
 
   outputs =
@@ -29,6 +30,7 @@
       nix-flatpak,
       lanzaboote,
       impermanence,
+      try,
       ...
     }:
     {
@@ -45,6 +47,7 @@
               useUserPackages = true;
               users.bryce.imports = [
                 ./home.nix
+                try.homeModules.default
                 {
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;
@@ -75,6 +78,7 @@
               useUserPackages = true;
               users.bryce.imports = [
                 ./home.nix
+                try.homeModules.default
                 {
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;

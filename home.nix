@@ -19,6 +19,8 @@ in
     ./modules/home/zellij.nix
     ./modules/home/zsh
     ./modules/home/fnm.nix
+    ./modules/home/try.nix
+    ./modules/home/rust.nix
     # Platform-specific modules
     ./modules/home/aerospace
     ./modules/home/karabiner

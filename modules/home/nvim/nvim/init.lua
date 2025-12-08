@@ -30,6 +30,7 @@ require('lazy').setup({
   require 'plugins.telescope',
   --   require 'plugins.vim-ai',
   require 'plugins.nvim-lspconfig',
+  require 'plugins.rustaceanvim',
   require 'plugins.conform',
   require 'plugins.copilot-lua',
   require 'plugins.sidekick',

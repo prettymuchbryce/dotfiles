@@ -2,10 +2,15 @@ return {
   'folke/sidekick.nvim',
   opts = {
     -- add any options here
+    nes = { enabled = false },
     cli = {
       mux = {
         backend = 'zellij',
         enabled = true,
+      },
+      tools = {
+        claude = { cmd = { 'claude' } },
+        claudeyolo = { cmd = { 'claudeyolo' } },
       },
     },
   },

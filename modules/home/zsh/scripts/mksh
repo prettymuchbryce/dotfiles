@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+# Directory where this script resides
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]:-$0}")" && pwd)"
+
+if [ ! $# -eq 1 ]; then
+  echo 'mksh takes one argument' 1>&2
+  exit 1
+fi
+
+TARGET="$SCRIPT_DIR/$1"
+
+if [ -e "$TARGET" ]; then
+  echo "$TARGET already exists" 1>&2
+  exit 1
+fi
+
+cat > "$TARGET" << 'EOF'
+#!/usr/bin/env bash
+set -e
+set -u
+set -o pipefail
+
+EOF
+
+chmod u+x "$TARGET"
+"${EDITOR:-vi}" "$TARGET"
