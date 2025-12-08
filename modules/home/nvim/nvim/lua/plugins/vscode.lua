@@ -12,6 +12,7 @@ return {
       group_overrides = {
         Cursor = { fg = c.vscBack, bg = c.vscLightBlue, bold = true },
         TermCursor = { fg = c.vscBack, bg = c.vscLightBlue, bold = true },
+        NormalNC = { bg = '#161616' },
       },
     }
 

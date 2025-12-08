@@ -28,6 +28,7 @@ in
     ./modules/home/claude-code.nix
     ./modules/home/mako.nix
     ./modules/home/codex.nix
+    ./modules/home/amp.nix
   ];
 
   # Option for simple OpenSnitch rules (consistent with system modules)

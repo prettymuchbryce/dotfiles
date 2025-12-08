@@ -51,6 +51,7 @@ require('lazy').setup({
   -- require 'plugins.codecompanion',
   require 'plugins.vim-gnupg',
   -- require 'plugins.hardtime',
+  require 'plugins.amp',
 }, {
   performance = {
     rtp = {

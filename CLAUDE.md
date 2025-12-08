@@ -9,3 +9,7 @@ Any change you make should _only_ impact the current system. If a change you mak
 You should always make changes to these configurations in the most idiomatic way possible. Please reference other configuration repositories on GitHub to learn more about how other users have structured their configurations for various software when searching for solutions to a common problem.
 
 When referencing nix-darwin options consult this page: https://nix-darwin.github.io/nix-darwin/manual/
+
+The user uses Neovim. When suggestions for vim changes are made always prefer Neovim solutions where they exist.
+
+Never assume your documentation is up to date. Always read documentation before implementing. Read the project's README.MD if it exists on GitHub.

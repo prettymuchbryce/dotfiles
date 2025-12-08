@@ -136,6 +136,9 @@ return {
 
         -- Ignored files are dark gray
         vim.api.nvim_set_hl(0, 'NvimTreeGitIgnored', { fg = c.vscGray })
+
+        -- Dim nvim-tree when inactive
+        vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { bg = '#161616' })
       end,
       group = vim.api.nvim_create_augroup('NvimTreeHighlight', { clear = true }),
     })

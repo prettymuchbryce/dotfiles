@@ -9,6 +9,7 @@ return {
         enabled = true,
       },
       tools = {
+        amp = { cmd = { 'amp', '--ide' } },
         claude = { cmd = { 'claude' } },
         claudeyolo = { cmd = { 'claudeyolo' } },
       },
