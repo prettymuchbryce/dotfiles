@@ -136,9 +136,6 @@ return {
 
         -- Ignored files are dark gray
         vim.api.nvim_set_hl(0, 'NvimTreeGitIgnored', { fg = c.vscGray })
-
-        -- Dim nvim-tree when inactive
-        vim.api.nvim_set_hl(0, 'NvimTreeNormalNC', { bg = '#161616' })
       end,
       group = vim.api.nvim_create_augroup('NvimTreeHighlight', { clear = true }),
     })
@@ -151,9 +148,9 @@ return {
       -- open the tree
       require('nvim-tree.api').tree.open()
       -- Move cursor to the file window only if a file was opened
-      local file = vim.fn.expand('%:p')
+      local file = vim.fn.expand '%:p'
       if file ~= '' and vim.fn.isdirectory(file) == 0 then
-        vim.cmd('wincmd l')
+        vim.cmd 'wincmd l'
       end
     end
     vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
