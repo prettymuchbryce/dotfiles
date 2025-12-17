@@ -5,11 +5,13 @@ This configuration automatically sets up a fresh Mac or Linux machine to my pers
 ### nix-darwin setup
 
 1. **Prerequisites**:
+   - Install Xcode Command Line Tools: `xcode-select install`
    - Install [Homebrew](https://brew.sh)
    - Install git-crypt: `brew install git-crypt`
    - Install Nix via [nix-installer](https://github.com/DeterminateSystems/nix-installer).
-      - To install the **recommended** vanilla upstream [Nix](https://nixos.org), you will need to explicitly say `no` when prompted to install `Determinate Nix`.
-      - Do not use the `--determinate` flag, as it will install the [Determinate](https://docs.determinate.systems/) distribution. By using the determinate distrubtion some nix-darwin functionality that relies on managing the Nix installation, like the `nix.*` options to adjust Nix settings or configure a Linux builder, will be unavailable.
+      - To install the **recommended** vanilla upstream [Nix](https://nixos.org), you will need to run the install command with `--prefer-upstream-nix`. i.e. `curl -fsSL https://install.determinate.systems/nix | sh -s -- install --prefer-upstream-nix`.
+      - By using the determinate distribution, some nix-darwin functionality that relies on managing the Nix installation, like the `nix.*` options to adjust Nix settings or configure a Linux builder, will be unavailable.
+      - The determinate nix installer is apparently removing support for upstream nix in 2026, so these installation instructions will need to be updated.
 1. Replace contents of `~/.dotfiles` with this repository.
 1. Download git-crypt key and move it to `.git/git-crypt/keys/default`.
 1. Run `git-crypt unlock .git/git-crypt/keys/default`.

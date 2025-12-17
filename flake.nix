@@ -35,9 +35,9 @@
       mistral-vibe,
       ...
     }:
-    {
-      # Darwin (macOS) configuration
-      darwinConfigurations."Bryces-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    let
+      # Helper function to create darwin configurations
+      mkDarwinConfiguration = hostname: nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
           ./hosts/darwin
@@ -64,6 +64,11 @@
           }
         ];
       };
+    in
+    {
+      # Darwin (macOS) configurations
+      darwinConfigurations."Bryces-MacBook-Pro" = mkDarwinConfiguration "Bryces-MacBook-Pro";
+      darwinConfigurations."Bryces-Mac-mini" = mkDarwinConfiguration "Bryces-Mac-mini";
 
       # NixOS configuration
       nixosConfigurations.meerkat = nixpkgs.lib.nixosSystem {
