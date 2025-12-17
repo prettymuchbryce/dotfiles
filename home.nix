@@ -29,6 +29,7 @@ in
     ./modules/home/mako.nix
     ./modules/home/codex.nix
     ./modules/home/amp.nix
+    ./modules/home/mistral-vibe.nix
   ];
 
   # Option for simple OpenSnitch rules (consistent with system modules)

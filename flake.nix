@@ -17,6 +17,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     try.url = "github:tobi/try";
+    mistral-vibe.url = "github:mistralai/mistral-vibe";
   };
 
   outputs =
@@ -31,6 +32,7 @@
       lanzaboote,
       impermanence,
       try,
+      mistral-vibe,
       ...
     }:
     {
@@ -55,6 +57,7 @@
                     system = "aarch64-darwin";
                     config.allowUnfree = true;
                   };
+                  _module.args.mistral-vibe = mistral-vibe.packages.aarch64-darwin.default;
                 }
               ];
             };

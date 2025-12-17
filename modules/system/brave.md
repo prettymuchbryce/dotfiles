@@ -1,6 +1,6 @@
 # Brave
 
-Installing Brave declaratively on Mac OS is a _hot pain in the asshole_.
+Installing Brave declaratively on MacOS is a _hot pain in the asshole_.
 
 I'll walk through some of the solutions I've tried to achieve this here and why they've all failed.
 
