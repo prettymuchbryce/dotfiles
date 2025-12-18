@@ -59,7 +59,5 @@ lib.mkIf isDarwinSyncthing {
         urAccepted = -1;
       };
     };
-
-    extraOptions = [ "--no-default-folder" ];
   };
 }
