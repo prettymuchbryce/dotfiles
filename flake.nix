@@ -53,6 +53,7 @@
                 {
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;
+                  _module.args.hostname = hostname;
                   _module.args.pkgs-solana = import nixpkgs-solana {
                     system = "aarch64-darwin";
                     config.allowUnfree = true;
@@ -90,6 +91,7 @@
                 {
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;
+                  _module.args.hostname = "meerkat";
                 }
               ];
             };
