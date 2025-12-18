@@ -16,14 +16,16 @@ let
     name: lib.strings.removeSuffix "\n" (builtins.readFile "${flakeRoot}/.secrets/${name}");
 
   machineKey = if isMacBookPro then "macbook-pro" else "mac-mini";
+
+  secretsDir = "${config.home.homeDirectory}/.dotfiles/.secrets";
 in
 lib.mkIf isDarwinSyncthing {
   services.syncthing = {
     enable = true;
 
     # Use pre-generated keys for deterministic device ID
-    cert = "${flakeRoot}/.secrets/syncthing-${machineKey}-cert.pem";
-    key = "${flakeRoot}/.secrets/syncthing-${machineKey}-key.pem";
+    cert = "${secretsDir}/syncthing-${machineKey}-cert.pem";
+    key = "${secretsDir}/syncthing-${machineKey}-key.pem";
 
     overrideDevices = true;
     overrideFolders = true;
