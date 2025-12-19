@@ -1,6 +1,6 @@
 local api = vim.api
-local NOTE_DIR = '/Users/bryce/notes'
-local NOTE_HOME = '/Users/bryce/notes/README.md'
+local NOTE_DIR = os.getenv('HOME') .. '/notes'
+local NOTE_HOME = NOTE_DIR .. '/README.md'
 
 local template = [[
 ---
@@ -36,11 +36,17 @@ end
 
 function NewNote()
   local name = vim.fn.input 'Note Name: '
+  if name == '' then
+    return
+  end
   local current_date = os.date '%Y-%m-%d'
   local filename = string.format('%s/%s-%s.md', NOTE_DIR, current_date, name)
   local hydrated_template = string.format(template, name, current_date)
   local file = io.open(filename, 'w')
-  -- Write new note file
+  if not file then
+    vim.notify('Error: Could not create note at ' .. filename, vim.log.levels.ERROR)
+    return
+  end
   file:write(hydrated_template)
   file:close()
 
