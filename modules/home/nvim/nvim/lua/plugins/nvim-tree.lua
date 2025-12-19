@@ -68,6 +68,22 @@ return {
     -- Get VSCode color palette
     local c = require('vscode.colors').get_colors()
 
+    -- Import notes module for pinned files support
+    local notes = require('notes')
+
+    -- NvimTree's default decorators plus our custom pinned decorator
+    local decorators = {
+      'Git',
+      'Open',
+      'Hidden',
+      'Modified',
+      'Bookmark',
+      'Diagnostics',
+      'Copied',
+      'Cut',
+      notes.create_pinned_decorator(),
+    }
+
     require('nvim-tree').setup {
       on_attach = on_attach,
       actions = {
@@ -75,7 +91,11 @@ return {
           resize_window = true,
         },
       },
+      sort = {
+        sorter = notes.nvimtree_sorter,
+      },
       renderer = {
+        decorators = decorators,
         highlight_git = true,
         highlight_opened_files = 'none',
         highlight_modified = 'none', -- Don't highlight executables in any special way
