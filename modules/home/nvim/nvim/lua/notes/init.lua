@@ -39,6 +39,8 @@ function NewNote()
   if name == '' then
     return
   end
+  -- Sanitize: remove characters invalid in filenames
+  name = name:gsub('[/\\:*?"<>|]', '-')
   local current_date = os.date '%Y-%m-%d'
   local filename = string.format('%s/%s-%s.md', NOTE_DIR, current_date, name)
   local hydrated_template = string.format(template, name, current_date)
@@ -85,7 +87,7 @@ function InsertTimestamp()
       local timestamp = tostring(os.date '%I:%M %p')
 
       -- Move cursor to beginning of line
-      api.nvim_command 'normal! 0'
+      vim.cmd 'normal! 0'
 
       -- Insert timestamp at the begining of the line and move cursor to end of the line
       api.nvim_put({ timestamp }, 'c', false, true)
@@ -97,15 +99,16 @@ function InsertTimestamp()
       local cursor_pos = api.nvim_win_get_cursor(0)
       local line = cursor_pos[1]
       local col = cursor_pos[2]
-      api.nvim_call_function('cursor', { line, col + 2 })
+      api.nvim_win_set_cursor(0, { line, col + 2 })
     end
   end
 end
 
-api.nvim_command 'augroup timestamp'
-api.nvim_command 'autocmd!'
-api.nvim_command 'autocmd CursorMovedI * lua InsertTimestamp()'
-api.nvim_command 'augroup END'
+vim.api.nvim_create_autocmd('CursorMovedI', {
+  group = vim.api.nvim_create_augroup('timestamp', { clear = true }),
+  pattern = '*',
+  callback = InsertTimestamp,
+})
 
 function ToggleTimestampMode()
   timestamp_enabled = not timestamp_enabled
