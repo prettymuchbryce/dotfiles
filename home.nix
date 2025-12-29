@@ -31,6 +31,7 @@ in
     ./modules/home/amp.nix
     ./modules/home/mistral-vibe.nix
     ./modules/home/syncthing.nix
+    ./modules/home/ovim.nix
   ];
 
   # Option for simple OpenSnitch rules (consistent with system modules)

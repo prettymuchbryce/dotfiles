@@ -5,6 +5,7 @@
 {
   imports = [
     ../../modules/system/brave.nix
+    ../../modules/system/ovim.nix
   ];
 
   # Necessary for using flakes on this system.

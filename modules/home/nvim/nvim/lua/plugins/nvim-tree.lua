@@ -173,7 +173,9 @@ return {
         vim.cmd 'wincmd l'
       end
     end
-    vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
+    if not vim.env.NVIM_NO_TREE then
+      vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
+    end
 
     -- Open current file in nvimtree
     vim.api.nvim_set_keymap('n', '<C-H>', ':NvimTreeFindFile<CR>', { noremap = true, silent = true })

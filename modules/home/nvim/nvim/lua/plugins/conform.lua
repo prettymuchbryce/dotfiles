@@ -27,6 +27,7 @@ return { -- Autoformat
       lua = { 'stylua' },
       nix = { 'nixfmt' },
       json = { 'jq' },
+      go = { 'goimports' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
