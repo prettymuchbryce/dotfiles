@@ -81,3 +81,12 @@ vim.opt.scrolloff = 10
 
 -- Set highlight on search
 vim.opt.hlsearch = true
+
+-- Minimal UI for ovim popups
+if vim.env.NVIM_OVIM then
+  vim.opt.number = false
+  vim.opt.relativenumber = false
+  vim.opt.signcolumn = 'no'
+  vim.opt.laststatus = 0
+  vim.opt.ruler = false
+end

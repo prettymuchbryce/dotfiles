@@ -1,5 +1,6 @@
 return {
   'svampkorg/moody.nvim',
+  cond = not vim.env.NVIM_OVIM,
   event = { 'ModeChanged', 'BufWinEnter', 'WinEnter' },
   opts = function()
     local c = require('vscode.colors').get_colors()

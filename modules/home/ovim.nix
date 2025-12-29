@@ -15,7 +15,7 @@
       # Also source .zshrc for additional PATH entries (fnm/node, cargo, etc.)
       source ~/.zshrc
 
-      export NVIM_NO_TREE=1  # Prevent file tree from opening in popups
+      export NVIM_OVIM=1  # Minimal UI for ovim popups
 
       # Signal that we're handling the terminal spawn ourselves
       "$OVIM_CLI" launcher-handled --session "$OVIM_SESSION_ID"
@@ -29,7 +29,8 @@
       alacritty \
         --option "window.dimensions.columns=$COLS" \
         --option "window.dimensions.lines=$LINES" \
-        --option "window.decorations=None" \
+        --option 'window.decorations="None"' \
+        --option "font.size=16" \
         -e $OVIM_EDITOR --listen "$OVIM_SOCKET" "$OVIM_FILE"
     '';
   };

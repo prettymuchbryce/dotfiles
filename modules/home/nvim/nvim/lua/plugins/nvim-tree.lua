@@ -173,7 +173,7 @@ return {
         vim.cmd 'wincmd l'
       end
     end
-    if not vim.env.NVIM_NO_TREE then
+    if not vim.env.NVIM_OVIM then
       vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_nvim_tree })
     end
 

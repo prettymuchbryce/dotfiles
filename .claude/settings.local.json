@@ -15,7 +15,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
-      "WebFetch(domain:organize.readthedocs.io)"
+      "WebFetch(domain:organize.readthedocs.io)",
+      "Bash(find:*)"
     ],
     "deny": [
       "Read(.secrets)"
