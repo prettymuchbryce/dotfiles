@@ -51,6 +51,14 @@ lib.mkIf isDarwinSyncthing {
             "Bryces-Mac-mini"
           ];
         };
+        "bounces" = {
+          id = "bounces";
+          path = "~/bounces";
+          devices = [
+            "Bryces-MacBook-Pro"
+            "Bryces-Mac-mini"
+          ];
+        };
       };
 
       options = {
