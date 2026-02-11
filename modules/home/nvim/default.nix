@@ -8,6 +8,9 @@
       " Prepend to 'runtimepath'
       set runtimepath^=~/.dotfiles/modules/home/nvim/nvim
 
+      " Load project-local .vim directory if present
+      set runtimepath+=./.vim
+
       " Then load your init
       luafile ~/.dotfiles/modules/home/nvim/nvim/init.lua
     '';
