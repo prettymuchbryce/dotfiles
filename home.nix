@@ -79,6 +79,7 @@ in
       [
         pkgs.nerd-fonts.fira-code
         pkgs.nerd-fonts.jetbrains-mono
+        (lib.setPrio 10 ruby) # Required by try (needs Ruby 3.2+ with Data.define)
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
         gcc # C compiler for neovim plugins
