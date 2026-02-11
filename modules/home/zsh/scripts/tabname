@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Sets the zellij tab name to "<prefix> [dir] (worktree)"
+# Usage: tabname <prefix>
+set -euo pipefail
+
+[[ -z "${ZELLIJ_PANE_ID:-}" ]] && exit 0
+
+prefix="$1"
+
+# Compute directory label and worktree suffix
+dir=""
+wt_suffix=""
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  git_dir="$(git rev-parse --absolute-git-dir 2>/dev/null)"
+  common_dir="$(cd "$(git rev-parse --git-common-dir 2>/dev/null)" && pwd)"
+  # common_dir is always the main repo's .git — its parent is the repo root
+  repo_root="$(dirname "$common_dir")"
+  if [[ "$repo_root" == "$HOME" ]]; then
+    dir="~"
+  elif [[ "$repo_root" == "$HOME/"* ]]; then
+    dir="~/$(basename "$repo_root")"
+  else
+    dir="/$(basename "$repo_root")"
+  fi
+  if [[ "$git_dir" != "$common_dir" ]]; then
+    wt_suffix=" ($(basename "$git_dir"))"
+  fi
+elif [[ "$PWD" == "$HOME" ]]; then
+  dir="~"
+elif [[ "$PWD" == "$HOME/"* ]]; then
+  dir="~/${PWD##*/}"
+else
+  dir="/${PWD##*/}"
+fi
+
+title="$prefix [$dir]$wt_suffix"
+
+# Escape for zellij-tab-name plugin JSON/format syntax
+title="${title//\\/\\\\}"
+title="${title//\"/\\\"}"
+title="${title//\{/\{\{}"
+title="${title//\}/\}\}}"
+
+zellij pipe --name change-tab-name -- \
+  "{\"pane_id\": \"$ZELLIJ_PANE_ID\", \"name\": \"$title\"}" &>/dev/null

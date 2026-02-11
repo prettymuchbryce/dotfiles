@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Called by Claude Code hooks to update zellij tab with status emoji.
+# Usage: zellij-claude-status <emoji>
+# Reads hook JSON from stdin to get cwd.
+set -euo pipefail
+
+emoji="$1"
+input="$(cat)"
+cwd="$(echo "$input" | jq -r '.cwd // empty' 2>/dev/null)" || true
+cd "${cwd:-$PWD}"
+
+exec tabname "$emoji claude"

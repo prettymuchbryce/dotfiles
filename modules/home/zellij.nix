@@ -24,6 +24,10 @@
 
   # Zellij configuration file in KDL format
   home.file.".config/zellij/config.kdl".text = ''
+      load_plugins {
+          "https://github.com/Cynary/zellij-tab-name/releases/download/v0.4.1/zellij-tab-name.wasm"
+      }
+
       keybinds clear-defaults=true {
         normal {
             // uncomment this and adjust key if using copy_on_select=false
@@ -77,7 +81,7 @@
             bind "k" "Left" "Up" "k" { GoToPreviousTab; }
             bind "l" "Right" "Down" "j" { GoToNextTab; }
             bind "n" { NewTab; SwitchToMode "Normal"; }
-            bind "x" { CloseTab; SwitchToMode "Normal"; }
+            bind "x" { CloseFocus; SwitchToMode "Normal"; }
             bind "s" { ToggleActiveSyncTab; SwitchToMode "Normal"; }
             bind "b" { BreakPane; SwitchToMode "Normal"; }
             bind "]" { BreakPaneRight; SwitchToMode "Normal"; }
@@ -282,7 +286,7 @@
     //   - true (default)
     //   - false
     //
-    // session_serialization false
+    session_serialization false
 
     // Whether pane viewports are serialized along with the session, default is false
     // (Requires restart)
