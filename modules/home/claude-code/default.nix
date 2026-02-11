@@ -1,5 +1,6 @@
 {
   config,
+  flakeRoot,
   lib,
   pkgs,
   ...
@@ -13,6 +14,64 @@ let
 in
 {
   config = {
+    home.file.".claude/CLAUDE.md".source = "${flakeRoot}/.secrets/CLAUDE.md";
+
+    home.file.".claude/settings.json".text = builtins.toJSON {
+      hooks = {
+        SessionStart = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "zellij-claude-status 🟢";
+              }
+            ];
+          }
+        ];
+        UserPromptSubmit = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "zellij-claude-status 🔴";
+              }
+            ];
+          }
+        ];
+        PostToolUse = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "zellij-claude-status 🔴";
+              }
+            ];
+          }
+        ];
+        Notification = [
+          {
+            matcher = "permission_prompt";
+            hooks = [
+              {
+                type = "command";
+                command = "zellij-claude-status ⛔️";
+              }
+            ];
+          }
+        ];
+        Stop = [
+          {
+            hooks = [
+              {
+                type = "command";
+                command = "zellij-claude-status 🟢";
+              }
+            ];
+          }
+        ];
+      };
+    };
+
     home.packages = [
       (pkgs.writeShellScriptBin "claude" ''
         export DISABLE_ERROR_REPORTING=1

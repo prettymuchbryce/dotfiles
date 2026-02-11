@@ -16,7 +16,11 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
       "WebFetch(domain:organize.readthedocs.io)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "WebFetch(domain:mynixos.com)",
+      "Bash(nix flake lock:*)",
+      "Bash(nix flake check:*)",
+      "WebFetch(domain:pypi.org)"
     ],
     "deny": [
       "Read(.secrets)"

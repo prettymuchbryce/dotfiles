@@ -17,7 +17,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     try.url = "github:tobi/try";
-    mistral-vibe.url = "github:mistralai/mistral-vibe";
+    autotidy.url = "github:prettymuchbryce/autotidy";
   };
 
   outputs =
@@ -32,39 +32,50 @@
       lanzaboote,
       impermanence,
       try,
-      mistral-vibe,
+      autotidy,
       ...
     }:
     let
       # Helper function to create darwin configurations
-      mkDarwinConfiguration = hostname: nix-darwin.lib.darwinSystem {
-        system = "aarch64-darwin";
-        modules = [
-          ./hosts/darwin
-          home-manager.darwinModules.home-manager
-          {
-            _module.args.flakeRoot = self;
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.bryce.imports = [
-                ./home.nix
-                try.homeModules.default
-                {
-                  _module.args.flakeInputs = inputs;
-                  _module.args.flakeRoot = self;
-                  _module.args.hostname = hostname;
-                  _module.args.pkgs-solana = import nixpkgs-solana {
-                    system = "aarch64-darwin";
-                    config.allowUnfree = true;
-                  };
-                  _module.args.mistral-vibe = mistral-vibe.packages.aarch64-darwin.default;
-                }
+      mkDarwinConfiguration =
+        hostname:
+        nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./hosts/darwin
+            home-manager.darwinModules.home-manager
+            {
+              nixpkgs.overlays = [
+                claude-code.overlays.default
+                # Override fish to skip tests (they fail on macOS)
+                (final: prev: {
+                  fish = prev.fish.overrideAttrs (oldAttrs: {
+                    doCheck = false;
+                  });
+                })
               ];
-            };
-          }
-        ];
-      };
+              _module.args.flakeRoot = self;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.bryce.imports = [
+                  ./home.nix
+                  try.homeModules.default
+                  autotidy.homeModules.default
+                  {
+                    _module.args.flakeInputs = inputs;
+                    _module.args.flakeRoot = self;
+                    _module.args.hostname = hostname;
+                    _module.args.pkgs-solana = import nixpkgs-solana {
+                      system = "aarch64-darwin";
+                      config.allowUnfree = true;
+                    };
+                  }
+                ];
+              };
+            }
+          ];
+        };
     in
     {
       # Darwin (macOS) configurations
@@ -81,6 +92,7 @@
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           {
+            nixpkgs.overlays = [ claude-code.overlays.default ];
             _module.args.flakeRoot = self;
             home-manager = {
               useGlobalPkgs = true;

@@ -25,7 +25,7 @@ in
     ./modules/home/aerospace
     ./modules/home/karabiner
     ./modules/home/hyprland
-    ./modules/home/claude-code.nix
+    ./modules/home/claude-code
     ./modules/home/mako.nix
     ./modules/home/codex.nix
     ./modules/home/amp.nix
