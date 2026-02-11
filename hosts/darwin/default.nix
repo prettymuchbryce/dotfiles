@@ -6,6 +6,7 @@
   imports = [
     ../../modules/system/brave.nix
     ../../modules/system/ovim.nix
+    ../../modules/system/pmset.nix
   ];
 
   # Necessary for using flakes on this system.
@@ -20,15 +21,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Override fish to skip tests (they fail on macOS)
-  nixpkgs.overlays = [
-    (final: prev: {
-      fish = prev.fish.overrideAttrs (oldAttrs: {
-        doCheck = false;
-      });
-    })
-  ];
 
   system.primaryUser = "bryce";
 
@@ -65,8 +57,11 @@
     ];
   };
 
+  # System settings using pmset
+  system.pmset.battery.displaysleep = 10;
+  system.pmset.charger.displaysleep = 10;
+
   # System settings
-  power.sleep.display = 10;
   system.defaults.NSGlobalDomain."com.apple.swipescrolldirection" = false;
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
