@@ -1,0 +1,53 @@
+---
+# autotidy configuration
+# https://github.com/prettymuchbryce/autotidy
+# Documentation: https://prettymuchbryce.github.io/autotidy/
+rules:
+  # First remove everything from the Desktop
+  - name: Move everything to ~/tmp
+    locations: ~/Desktop
+    actions:
+      - move: ~/tmp
+  # Then sort further
+  - name: Sort screenshots
+    locations: ~/tmp
+    filters:
+      - name: Screenshot*
+    actions:
+      - move: ~/tmp/screenshots
+  - name: Sort images
+    locations: ~/tmp
+    filters:
+      - extension: [png, jpg, jpeg, gif, webp]
+      - not:
+          - name: Screenshot*
+    actions:
+      - move: ~/tmp/images
+  - name: Clean up Voice Memos
+    locations: ~/tmp
+    filters:
+      - name: New Recording*
+    actions:
+      - move: ~/tmp/voicememos
+  - name: Clean up MP3s
+    locations: ~/tmp
+    filters:
+      - extension: [mp3]
+      - not:
+          - name: New Recording*
+    actions:
+      - move: ~/tmp/mp3s
+  - name: Clean up art
+    locations: ~/tmp
+    filters:
+      - extension: [asesprite]
+    actions:
+      - move: ~/tmp/art
+  - name: Clean up PDFs
+    locations: ~/tmp
+    filters:
+      - extension: [pdf]
+    actions:
+      - move: ~/tmp/pdfs
+logging:
+  level: debug
