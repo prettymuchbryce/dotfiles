@@ -12,6 +12,7 @@
     llvm
     lld
     mold
+    cmake
 
     # python
     uv

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+	echo "usage: p8 [<worktree>]" >&2
+	exit 1
+}
+
+# 0 or 1 arg only
+[[ $# -gt 1 ]] && usage
+
+PICO8="/Applications/PICO-8.app/Contents/MacOS/pico8"
+
+if [[ $# -eq 0 ]]; then
+	CART="./game.p8"
+else
+	NAME="$1"
+	WT_DIR=".claude/worktrees/$NAME"
+	CART="$WT_DIR/game.p8"
+fi
+
+if [[ ! -x "$PICO8" ]]; then
+	echo "error: pico8 executable not found at: $PICO8" >&2
+	exit 1
+fi
+
+if [[ ! -f "$CART" ]]; then
+	echo "error: cart not found: $CART" >&2
+	exit 1
+fi
+
+exec "$PICO8" "$CART"
