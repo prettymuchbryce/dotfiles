@@ -1,0 +1,33 @@
+#compdef wt
+
+local -a subcmds
+subcmds=(
+  'n:Create a new worktree'
+  'o:Open (cd into) a worktree'
+  'cp:Copy a file to another worktree'
+  'rm:Remove a worktree'
+  'l:List worktrees'
+)
+
+if (( CURRENT == 2 )); then
+  _describe 'command' subcmds
+elif (( CURRENT == 3 )); then
+  case "${words[2]}" in
+  o|rm)
+    local -a names
+    names=("${(@f)$(__wt_names 2>/dev/null)}")
+    [[ -n "${names[1]}" ]] && compadd -a names
+    ;;
+  cp)
+    _files
+    ;;
+  esac
+elif (( CURRENT == 4 )); then
+  case "${words[2]}" in
+  cp)
+    local -a names
+    names=("${(@f)$(__wt_names 2>/dev/null)}")
+    [[ -n "${names[1]}" ]] && compadd -a names
+    ;;
+  esac
+fi

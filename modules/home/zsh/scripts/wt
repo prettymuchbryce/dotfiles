@@ -1,0 +1,193 @@
+# wt - git worktree helper
+# Worktrees are created under .claude/worktrees/ in the repo root.
+
+# Resolve a worktree name to its absolute path via git worktree list.
+# Excludes the main worktree. Returns empty string if not found.
+__wt_resolve() {
+	local name="$1"
+	local toplevel
+	toplevel="$(git rev-parse --show-toplevel 2>/dev/null)" || return 1
+	git worktree list --porcelain | while IFS= read -r line; do
+		case "$line" in
+		worktree\ *)
+			local wt_path="${line#worktree }"
+			# skip the main worktree
+			[[ "$wt_path" == "$toplevel" ]] && continue
+			if [[ "$(basename "$wt_path")" == "$name" ]]; then
+				echo "$wt_path"
+				return 0
+			fi
+			;;
+		esac
+	done
+	return 1
+}
+
+# List worktree names (basenames), excluding the main worktree.
+__wt_names() {
+	local toplevel
+	toplevel="$(git rev-parse --show-toplevel 2>/dev/null)" || return 1
+	git worktree list --porcelain | while IFS= read -r line; do
+		case "$line" in
+		worktree\ *)
+			local wt_path="${line#worktree }"
+			[[ "$wt_path" == "$toplevel" ]] && continue
+			basename "$wt_path"
+			;;
+		esac
+	done
+}
+
+__wt_list() {
+	git worktree list
+}
+
+__wt_usage() {
+	cat >&2 <<'EOF'
+usage: wt <command> [<args>]
+
+commands:
+  n  <name> [--yolo=false]        Create a new worktree and launch claude
+  o  <name>                       Open (cd into) a worktree
+  cp <file> <name> [--overwrite]  Copy a file to another worktree
+  rm <name>                       Remove a worktree
+  l                               List worktrees
+EOF
+}
+
+__wt_invalid_name() {
+	echo "error: no worktree named '$1'" >&2
+	echo "" >&2
+	__wt_list >&2
+}
+
+wt() {
+	if ! git rev-parse --show-toplevel &>/dev/null; then
+		echo "error: not in a git repository" >&2
+		return 1
+	fi
+
+	local toplevel
+	toplevel="$(git rev-parse --show-toplevel)"
+
+	if [[ $# -eq 0 ]]; then
+		__wt_usage
+		return 1
+	fi
+
+	local cmd="$1"
+	shift
+
+	case "$cmd" in
+	n)
+		[[ $# -lt 1 || $# -gt 2 ]] && { __wt_usage; return 1; }
+		local name="$1"
+		local yolo=true
+		[[ "${2:-}" == "--yolo=false" ]] && yolo=false
+
+		local wt_path="$toplevel/.claude/worktrees/$name"
+		if [[ ! -d "$wt_path" ]]; then
+			mkdir -p "$toplevel/.claude/worktrees"
+			git worktree add "$wt_path" HEAD
+		fi
+
+		local main_branch
+		main_branch="$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')"
+		[[ -z "$main_branch" ]] && main_branch="master"
+
+		local prompt
+		read -r -d '' prompt <<EOF
+You are working inside a git worktree at: $wt_path
+The main worktree (${main_branch}) is at: $toplevel
+
+You may be working simultaneously with other agents in other worktrees or in ${main_branch}. When I instruct you to prepare a commit:
+
+1. Create commits on top of ${main_branch} by rebasing or cherry-picking your changes.
+2. Take special care not to stomp on changes from other worktrees — if you encounter unexpected modifications to files you didn't touch, stop and inform me.
+3. After the commit is ready, and after you've confirmed that the ${main_branch} ref has not moved since you last checked, update the ref for ${main_branch} to point at the new commit (e.g. git update-ref refs/heads/${main_branch} <sha>).
+4. You CANNOT run "git checkout ${main_branch}" from this worktree — it will fail with: fatal: '${main_branch}' is already used by worktree at ${toplevel}. Use git update-ref instead.
+EOF
+
+		cd "$wt_path"
+		if [[ "$yolo" == true ]]; then
+			exec claude --dangerously-skip-permissions "$prompt"
+		else
+			exec claude "$prompt"
+		fi
+		;;
+	cp)
+		[[ $# -lt 2 || $# -gt 3 ]] && { __wt_usage; return 1; }
+		local src="$1"
+		local dest_wt="$2"
+		local overwrite=false
+		[[ "${3:-}" == "--overwrite" ]] && overwrite=true
+
+		if [[ ! -e "$src" ]]; then
+			echo "error: '$src' does not exist" >&2
+			return 1
+		fi
+
+		local resolved
+		resolved="$(__wt_resolve "$dest_wt")"
+		if [[ -z "$resolved" ]]; then
+			__wt_invalid_name "$dest_wt"
+			return 1
+		fi
+
+		# Compute the relative path from the current worktree root
+		local current_root
+		current_root="$(git rev-parse --show-toplevel)"
+		local abs_src
+		abs_src="$(cd "$(dirname "$src")" && pwd)/$(basename "$src")"
+		local rel_path="${abs_src#$current_root/}"
+		if [[ "$rel_path" == "$abs_src" ]]; then
+			echo "error: '$src' is not inside the current worktree" >&2
+			return 1
+		fi
+
+		local dest="$resolved/$rel_path"
+		if [[ -e "$dest" && "$overwrite" == false ]]; then
+			echo "error: '$dest' already exists (use --overwrite)" >&2
+			return 1
+		fi
+
+		mkdir -p "$(dirname "$dest")"
+		cp "$abs_src" "$dest"
+		echo "copied $rel_path -> $dest_wt"
+		;;
+	o)
+		[[ $# -ne 1 ]] && { __wt_usage; return 1; }
+		local name="$1"
+		local resolved
+		resolved="$(__wt_resolve "$name")"
+		if [[ -z "$resolved" ]]; then
+			__wt_invalid_name "$name"
+			return 1
+		fi
+		cd "$resolved"
+		;;
+	rm)
+		[[ $# -ne 1 ]] && { __wt_usage; return 1; }
+		local name="$1"
+		local resolved
+		resolved="$(__wt_resolve "$name")"
+		if [[ -z "$resolved" ]]; then
+			__wt_invalid_name "$name"
+			return 1
+		fi
+		if ! git worktree remove "$resolved" 2>/dev/null; then
+			echo "git worktree remove failed, forcing removal..." >&2
+			rm -rf "$resolved"
+			git worktree prune
+		fi
+		;;
+	l)
+		__wt_list
+		;;
+	*)
+		echo "error: unknown command '$cmd'" >&2
+		__wt_usage
+		return 1
+		;;
+	esac
+}
