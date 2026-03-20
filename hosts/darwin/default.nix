@@ -54,6 +54,7 @@
       "notion"
       "discord"
       "ghostty"
+      "superwhisper"
     ];
   };
 

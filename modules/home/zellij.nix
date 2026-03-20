@@ -25,7 +25,7 @@
   # Zellij configuration file in KDL format
   home.file.".config/zellij/config.kdl".text = ''
       load_plugins {
-          "https://github.com/Cynary/zellij-tab-name/releases/download/v0.4.1/zellij-tab-name.wasm"
+          "https://github.com/Cynary/zellij-tab-name/releases/download/v0.4.2/zellij-tab-name.wasm"
       }
 
       keybinds clear-defaults=true {
@@ -271,7 +271,7 @@
     //   - true (default)
     //   - false
     //
-    pane_frames false
+    pane_frames true
 
     // Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
     // Options:

@@ -42,6 +42,10 @@
       };
     };
 
+    lazygit = {
+      enable = true;
+    };
+
     gh = {
       enable = true;
       settings = "${flakeRoot}/.secrets/gh-config.nix";

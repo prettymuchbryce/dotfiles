@@ -10,6 +10,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     claude-code.url = "github:sadjow/claude-code-nix";
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
@@ -28,6 +29,7 @@
       nixpkgs-solana,
       home-manager,
       claude-code,
+      codex-cli-nix,
       nix-flatpak,
       lanzaboote,
       impermanence,

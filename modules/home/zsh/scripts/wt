@@ -2,7 +2,7 @@
 # Worktrees are created under .claude/worktrees/ in the repo root.
 
 # Resolve a worktree name to its absolute path via git worktree list.
-# Excludes the main worktree. Returns empty string if not found.
+# Excludes the master worktree. Returns empty string if not found.
 __wt_resolve() {
 	local name="$1"
 	local toplevel
@@ -11,7 +11,7 @@ __wt_resolve() {
 		case "$line" in
 		worktree\ *)
 			local wt_path="${line#worktree }"
-			# skip the main worktree
+			# skip the master worktree
 			[[ "$wt_path" == "$toplevel" ]] && continue
 			if [[ "$(basename "$wt_path")" == "$name" ]]; then
 				echo "$wt_path"
@@ -23,7 +23,7 @@ __wt_resolve() {
 	return 1
 }
 
-# List worktree names (basenames), excluding the main worktree.
+# List worktree names (basenames), excluding the master worktree.
 __wt_names() {
 	local toplevel
 	toplevel="$(git rev-parse --show-toplevel 2>/dev/null)" || return 1
@@ -91,21 +91,21 @@ wt() {
 			git worktree add "$wt_path" HEAD
 		fi
 
-		local main_branch
-		main_branch="$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')"
-		[[ -z "$main_branch" ]] && main_branch="master"
+		local master_branch
+		master_branch="$(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@')"
+		[[ -z "$master_branch" ]] && master_branch="master"
 
 		local prompt
 		read -r -d '' prompt <<EOF
 You are working inside a git worktree at: $wt_path
-The main worktree (${main_branch}) is at: $toplevel
+The master worktree (${master_branch}) is at: $toplevel
 
-You may be working simultaneously with other agents in other worktrees or in ${main_branch}. When I instruct you to prepare a commit:
+You may be working simultaneously with other agents in other worktrees or in ${master_branch}. When I instruct you to prepare a commit:
 
-1. Create commits on top of ${main_branch} by rebasing or cherry-picking your changes.
+1. Create commits on top of ${master_branch} by rebasing or cherry-picking your changes.
 2. Take special care not to stomp on changes from other worktrees — if you encounter unexpected modifications to files you didn't touch, stop and inform me.
-3. After the commit is ready, and after you've confirmed that the ${main_branch} ref has not moved since you last checked, update the ref for ${main_branch} to point at the new commit (e.g. git update-ref refs/heads/${main_branch} <sha>).
-4. You CANNOT run "git checkout ${main_branch}" from this worktree — it will fail with: fatal: '${main_branch}' is already used by worktree at ${toplevel}. Use git update-ref instead.
+3. After the commit is ready, and after you've confirmed that the ${master_branch} ref has not moved since you last checked, update the ref for ${master_branch} to point at the new commit (e.g. git update-ref refs/heads/${master_branch} <sha>).
+4. You CANNOT run "git checkout ${master_branch}" from this worktree — it will fail with: fatal: '${master_branch}' is already used by worktree at ${toplevel}. Use git update-ref instead.
 EOF
 
 		cd "$wt_path"

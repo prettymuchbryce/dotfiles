@@ -31,4 +31,7 @@
 
   # Claude code
   claudeyolo = "claude --dangerously-skip-permissions";
+
+  # Codex
+  codex = "codex --no-alt-screen --yolo";
 }

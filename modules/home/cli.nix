@@ -13,6 +13,7 @@
     lld
     mold
     cmake
+    duckdb
 
     # python
     uv

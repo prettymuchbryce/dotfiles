@@ -17,6 +17,17 @@ in
     home.file.".claude/CLAUDE.md".source = "${flakeRoot}/.secrets/CLAUDE.md";
 
     home.file.".claude/settings.json".text = builtins.toJSON {
+      voiceEnabled = true;
+      permissions = {
+        deny = [
+          "Read(**/.secrets/**)"
+          "Bash(cat */.secrets/*)"
+          "Bash(less */.secrets/*)"
+          "Bash(head */.secrets/*)"
+          "Bash(tail */.secrets/*)"
+          "Bash(*/.secrets/*)"
+        ];
+      };
       hooks = {
         SessionStart = [
           {
@@ -54,7 +65,7 @@ in
             hooks = [
               {
                 type = "command";
-                command = "zellij-claude-status ⛔️";
+                command = "zellij-claude-status 🔴";
               }
             ];
           }

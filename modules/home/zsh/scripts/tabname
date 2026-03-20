@@ -35,11 +35,15 @@ fi
 
 title="$prefix [$dir]$wt_suffix"
 
+# Set pane name
+zellij action rename-pane "$title" &>/dev/null
+
 # Escape for zellij-tab-name plugin JSON/format syntax
-title="${title//\\/\\\\}"
-title="${title//\"/\\\"}"
-title="${title//\{/\{\{}"
-title="${title//\}/\}\}}"
+escaped="$title"
+escaped="${escaped//\\/\\\\}"
+escaped="${escaped//\"/\\\"}"
+escaped="${escaped//\{/\{\{}"
+escaped="${escaped//\}/\}\}}"
 
 zellij pipe --name change-tab-name -- \
-  "{\"pane_id\": \"$ZELLIJ_PANE_ID\", \"name\": \"$title\"}" &>/dev/null
+  "{\"pane_id\": \"$ZELLIJ_PANE_ID\", \"name\": \"$escaped\"}" &>/dev/null
