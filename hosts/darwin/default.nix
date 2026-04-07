@@ -68,6 +68,11 @@ in
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Keep the actual Darwin host name aligned with the flake host key so
+  # services like Ollama accept the matching MagicDNS short name.
+  networking.hostName = hostname;
+  networking.localHostName = hostname;
+
   system.primaryUser = "bryce";
 
   users.users.bryce = {
