@@ -10,6 +10,7 @@ let
 
     tailscale_cli="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     curl_bin="${pkgs.curl}/bin/curl"
+    jq_bin="${pkgs.jq}/bin/jq"
     ollama_url="http://127.0.0.1:11434/api/version"
 
     if [ ! -x "$tailscale_cli" ]; then
@@ -18,7 +19,7 @@ let
     fi
 
     echo "Waiting for Tailscale to become ready..."
-    until "$tailscale_cli" wait --timeout=5 >/dev/null 2>&1; do
+    until "$tailscale_cli" status --json 2>/dev/null | "$jq_bin" -e '.BackendState == "Running"' >/dev/null; do
       sleep 2
     done
 
