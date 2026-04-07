@@ -1,11 +1,14 @@
 {
   flakeInputs,
+  hostname,
   lib,
   pkgs,
   ...
 }:
 let
+  isMacMini = hostname == "Bryces-Mac-mini";
   opencodePkg = flakeInputs.opencode.packages.${pkgs.stdenv.system}.default;
+  ollamaBaseUrl = if isMacMini then "http://127.0.0.1:11434/v1" else "http://bryces-mac-mini:11434/v1";
   opencodeConfig = builtins.toJSON {
     "$schema" = "https://opencode.ai/config.json";
     autoupdate = false;
@@ -16,7 +19,7 @@ let
         npm = "@ai-sdk/openai-compatible";
         name = "Ollama (local)";
         options = {
-          baseURL = "http://127.0.0.1:11434/v1";
+          baseURL = ollamaBaseUrl;
         };
         models = {
           "sinhang/qwen3.5-claude-4.6-opus:27b-q4_K_M" = {

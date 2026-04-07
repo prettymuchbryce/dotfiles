@@ -1,10 +1,12 @@
 {
   flakeInputs,
+  hostname,
   lib,
   pkgs,
   ...
 }:
 let
+  isMacMini = hostname == "Bryces-Mac-mini";
   hermesSource = flakeInputs.hermes-agent.outPath;
   hermesInputs = flakeInputs.hermes-agent.inputs;
   hermesPkg =
@@ -75,7 +77,7 @@ let
     else
       flakeInputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default;
   hermesConfig = pkgs.formats.yaml { };
-  ollamaBaseUrl = "http://127.0.0.1:11434/v1";
+  ollamaBaseUrl = if isMacMini then "http://127.0.0.1:11434/v1" else "http://bryces-mac-mini:11434/v1";
 in
 {
   config = lib.mkIf pkgs.stdenv.isDarwin {

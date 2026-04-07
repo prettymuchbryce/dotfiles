@@ -1,6 +1,24 @@
 # darwin.nix
 
-{ pkgs, ... }:
+{ pkgs, lib, hostname, ... }:
+
+let
+  isMacMini = hostname == "Bryces-Mac-mini";
+
+  ollamaTailscaleServeScript = pkgs.writeShellScript "ollama-tailscale-serve" ''
+    set -euo pipefail
+
+    tailscale_cli="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+    if [ ! -x "$tailscale_cli" ]; then
+      echo "Tailscale CLI not found at $tailscale_cli" >&2
+      exit 1
+    fi
+
+    "$tailscale_cli" wait --timeout=0
+    "$tailscale_cli" serve --bg --tcp=11434 tcp://localhost:11434
+  '';
+in
 
 {
   imports = [
@@ -57,6 +75,7 @@
       "karabiner-elements"
       "nikitabobko/tap/aerospace"
       "ollama"
+      "tailscale-app"
       "protonvpn"
       "raycast"
       "signal"
@@ -71,6 +90,33 @@
       "ghostty"
       "superwhisper"
     ];
+  };
+
+  launchd.user.agents = lib.optionalAttrs isMacMini {
+    ollama-server = {
+      serviceConfig = {
+        ProgramArguments = [
+          "/opt/homebrew/bin/ollama"
+          "serve"
+        ];
+        EnvironmentVariables = {
+          OLLAMA_HOST = "127.0.0.1:11434";
+        };
+        KeepAlive = true;
+        RunAtLoad = true;
+        StandardOutPath = "/Users/bryce/Library/Logs/ollama-server.log";
+        StandardErrorPath = "/Users/bryce/Library/Logs/ollama-server.log";
+      };
+    };
+
+    ollama-tailscale-serve = {
+      serviceConfig = {
+        ProgramArguments = [ ollamaTailscaleServeScript ];
+        RunAtLoad = true;
+        StandardOutPath = "/Users/bryce/Library/Logs/ollama-tailscale-serve.log";
+        StandardErrorPath = "/Users/bryce/Library/Logs/ollama-tailscale-serve.log";
+      };
+    };
   };
 
   # System settings using pmset
