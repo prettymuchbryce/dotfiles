@@ -9,14 +9,26 @@ let
     set -euo pipefail
 
     tailscale_cli="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    curl_bin="${pkgs.curl}/bin/curl"
+    ollama_url="http://127.0.0.1:11434/api/version"
 
     if [ ! -x "$tailscale_cli" ]; then
       echo "Tailscale CLI not found at $tailscale_cli" >&2
       exit 1
     fi
 
-    "$tailscale_cli" wait --timeout=0
-    "$tailscale_cli" serve --bg --tcp=11434 tcp://localhost:11434
+    echo "Waiting for Tailscale to become ready..."
+    until "$tailscale_cli" wait --timeout=5 >/dev/null 2>&1; do
+      sleep 2
+    done
+
+    echo "Waiting for local Ollama to respond..."
+    until "$curl_bin" -fsS --max-time 2 "$ollama_url" >/dev/null; do
+      sleep 2
+    done
+
+    echo "Publishing Ollama to the tailnet on TCP 11434..."
+    "$tailscale_cli" serve --bg --tcp=11434 tcp://127.0.0.1:11434
   '';
 in
 
