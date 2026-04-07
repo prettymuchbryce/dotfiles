@@ -49,6 +49,9 @@
         hostname:
         nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = {
+            inherit hostname;
+          };
           modules = [
             ./hosts/darwin
             home-manager.darwinModules.home-manager
