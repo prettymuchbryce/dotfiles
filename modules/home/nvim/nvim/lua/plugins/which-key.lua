@@ -28,10 +28,12 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>s', group = '[S]earch' },
       { '<leader>t', group = '[T]oggle' },
       { '<leader>w', group = '[W]orkspace' },
+      { '<leader>a', group = '[A]I' },
     }
     -- visual mode
     require('which-key').add {
       { '<leader>h', desc = 'Git [H]unk', mode = 'v' },
+      { '<leader>a', group = '[A]I', mode = 'v' },
     }
   end,
 }

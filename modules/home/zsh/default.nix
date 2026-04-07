@@ -23,8 +23,6 @@
     enableZshIntegration = true;
   };
 
-  home.file.".config/openaiapirc".source = "${flakeRoot}/.secrets/openaiapirc";
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -67,6 +65,15 @@
       ${lib.optionalString pkgs.stdenv.isLinux ''
         export PATH="/home/bryce/.local/bin:$PATH"
       ''}
+
+      # Hold npm installs back by 7 days until we can rely on min-release-age.
+      if command -v npm >/dev/null 2>&1; then
+        if date -u -v-7d '+%Y-%m-%dT%H:%M:%SZ' >/dev/null 2>&1; then
+          export NPM_CONFIG_BEFORE="$(date -u -v-7d '+%Y-%m-%dT%H:%M:%SZ')"
+        else
+          export NPM_CONFIG_BEFORE="$(date -u --date='7 days ago' '+%Y-%m-%dT%H:%M:%SZ')"
+        fi
+      fi
 
       ${builtins.readFile ./session_variables.zsh}
       source "${config.home.homeDirectory}/.dotfiles/modules/home/zsh/functions.zsh"

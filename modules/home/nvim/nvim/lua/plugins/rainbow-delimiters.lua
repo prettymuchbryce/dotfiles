@@ -9,6 +9,11 @@ return {
         [''] = rainbow_delimiters.strategy['global'],
         vim = rainbow_delimiters.strategy['local'],
       },
+      -- Only attach when a treesitter parser exists for the buffer's filetype
+      condition = function(buf)
+        local ok, _ = pcall(vim.treesitter.get_parser, buf)
+        return ok
+      end,
       query = {
         [''] = 'rainbow-delimiters',
         lua = 'rainbow-blocks',

@@ -35,15 +35,10 @@ fi
 
 title="$prefix [$dir]$wt_suffix"
 
-# Set pane name
-zellij action rename-pane "$title" &>/dev/null
+# Rename actions are best-effort. Some subprocess contexts inherit ZELLIJ_*
+# vars but are not attached to an active Zellij client, which makes the CLI
+# exit non-zero with "There is no active session!".
+zellij action rename-pane "$title" &>/dev/null || true
 
-# Escape for zellij-tab-name plugin JSON/format syntax
-escaped="$title"
-escaped="${escaped//\\/\\\\}"
-escaped="${escaped//\"/\\\"}"
-escaped="${escaped//\{/\{\{}"
-escaped="${escaped//\}/\}\}}"
-
-zellij pipe --name change-tab-name -- \
-  "{\"pane_id\": \"$ZELLIJ_PANE_ID\", \"name\": \"$escaped\"}" &>/dev/null
+# Set tab name directly using Zellij's built-in action.
+zellij action rename-tab "$title" &>/dev/null || true

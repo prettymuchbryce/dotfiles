@@ -33,7 +33,7 @@ require('lazy').setup({
   require 'plugins.rustaceanvim',
   require 'plugins.conform',
   require 'plugins.copilot-lua',
-  require 'plugins.sidekick',
+  -- require 'plugins.sidekick',
   require 'plugins.nvim-cmp',
   require 'plugins.todo-comments',
   require 'plugins.nvim-tree',
@@ -51,7 +51,8 @@ require('lazy').setup({
   -- require 'plugins.codecompanion',
   require 'plugins.vim-gnupg',
   -- require 'plugins.hardtime',
-  require 'plugins.amp',
+  -- require 'plugins.amp',
+  require 'plugins.claudecode',
 }, {
   performance = {
     rtp = {

@@ -7,10 +7,7 @@
 }:
 
 let
-  nodejsDrv = builtins.head (
-    builtins.filter (drv: builtins.match "nodejs.*" drv.name != null) pkgs.claude-code.nativeBuildInputs
-  );
-  nodejs = nodejsDrv.out;
+  claudeExe = lib.getExe pkgs.claude-code;
 in
 {
   config = {
@@ -94,35 +91,35 @@ in
     opensnitchRules = [
       {
         name = "Allow Claude Code → Claude AI";
-        process = "${lib.getExe nodejs}";
+        process = claudeExe;
         protocol = "tcp";
         port = 443;
         host = "(?i)^([a-zA-Z0-9-]+\\.)?claude\\.ai$";
       }
       {
         name = "Allow Claude Code → Anthropic";
-        process = "${lib.getExe nodejs}";
+        process = claudeExe;
         protocol = "tcp";
         port = 443;
         host = "(?i)^([a-zA-Z0-9-]+\\.)?anthropic\\.com$";
       }
       {
         name = "Allow Claude Code → npm registry";
-        parentProcess = "${lib.getExe nodejs}";
+        parentProcess = claudeExe;
         protocol = "tcp";
         port = 443;
         host = "(?i)^registry\\.npmjs\\.org$";
       }
       {
         name = "Allow Claude Code → Google";
-        process = "${lib.getExe nodejs}";
+        process = claudeExe;
         protocol = "tcp";
         port = 443;
         host = "www.google.com";
       }
       {
         name = "Allow Claude Code → GitHub";
-        process = "${lib.getExe nodejs}";
+        process = claudeExe;
         protocol = "tcp";
         port = 443;
         host = "raw.githubusercontent.com";

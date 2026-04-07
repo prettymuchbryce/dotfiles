@@ -204,20 +204,13 @@ end
 
 -- Custom decorator for NvimTree (pin icon + highlight)
 local function create_pinned_decorator()
-  local UserDecorator = require('nvim-tree.renderer.decorator.user')
-  local PinnedDecorator = UserDecorator:extend()
+  local PinnedDecorator = require('nvim-tree.api').Decorator:extend()
 
-  function PinnedDecorator:new(args)
-    args = args or {}
-    PinnedDecorator.super.new(self, args)
-    self.explorer = args.explorer
+  function PinnedDecorator:new()
     self.enabled = true
     self.highlight_range = 'all'
     self.icon_placement = 'before'
     self.icon = { str = '📌', hl = { 'NvimTreePinnedIcon' } }
-    if self.define_sign then
-      self:define_sign(self.icon)
-    end
   end
 
   function PinnedDecorator:icons(node)

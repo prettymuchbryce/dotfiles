@@ -1,4 +1,4 @@
-# Zellij tab naming via tabname script + zellij-tab-name plugin.
+# Zellij tab naming via the tabname script.
 
 __zellij_cmd_running=""
 

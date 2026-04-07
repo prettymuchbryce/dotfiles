@@ -11,7 +11,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     claude-code.url = "github:sadjow/claude-code-nix";
     codex-cli-nix.url = "github:sadjow/codex-cli-nix";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
+    opencode.url = "github:anomalyco/opencode";
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.2";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +21,7 @@
     impermanence.url = "github:nix-community/impermanence";
     try.url = "github:tobi/try";
     autotidy.url = "github:prettymuchbryce/autotidy";
+    comfyui-nix.url = "github:utensils/comfyui-nix";
   };
 
   outputs =
@@ -30,11 +33,14 @@
       home-manager,
       claude-code,
       codex-cli-nix,
+      hermes-agent,
       nix-flatpak,
+      opencode,
       lanzaboote,
       impermanence,
       try,
       autotidy,
+      comfyui-nix,
       ...
     }:
     let
@@ -64,6 +70,7 @@
                   ./home.nix
                   try.homeModules.default
                   autotidy.homeModules.default
+                  ./modules/home/autotidy
                   {
                     _module.args.flakeInputs = inputs;
                     _module.args.flakeRoot = self;
@@ -106,15 +113,15 @@
                   _module.args.flakeInputs = inputs;
                   _module.args.flakeRoot = self;
                   _module.args.hostname = "meerkat";
+                  _module.args.pkgs-solana = import nixpkgs-solana {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                  };
                 }
               ];
             };
           }
         ];
       };
-
-      # Expose package sets for convenience
-      darwinPackages = self.darwinConfigurations."Bryces-MacBook-Pro".pkgs;
-      nixosPackages = self.nixosConfigurations.meerkat.pkgs;
     };
 }

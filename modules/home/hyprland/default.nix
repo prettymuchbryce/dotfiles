@@ -32,6 +32,7 @@
       gtk4.extraConfig = {
         gtk-application-prefer-dark-theme = 1;
       };
+      gtk4.theme = null;
     };
 
     # Ensure dconf is enabled for GTK apps

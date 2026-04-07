@@ -14,7 +14,11 @@ vim.api.nvim_set_keymap('n', '<C-w>;', '<C-w>l', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-l>', ':bprevious<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<C-k>', ':bnext<CR>', { noremap = true })
 vim.api.nvim_set_keymap('i', 'kj', '<ESC>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('t', 'kj', [[<C-\><C-n>]], { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('t', 'kj', [[<C-\><C-n>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>j', [[<C-\><C-n><C-w>h]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>k', [[<C-\><C-n><C-w>j]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>l', [[<C-\><C-n><C-w>k]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<C-w>;', [[<C-\><C-n><C-w>l]], { noremap = true, silent = true })
 
 -- Bind 'n' to go to the next search item
 -- vim.keymap.set('n', 'n', 'n', { noremap = true, silent = true })

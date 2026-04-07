@@ -32,6 +32,6 @@
   # Claude code
   claudeyolo = "claude --dangerously-skip-permissions";
 
-  # Codex
-  codex = "codex --no-alt-screen --yolo";
+  # Codex — run inside tmux to work around Zellij alternate screen scrollback bug
+  codex = "tmux set -g mouse on \\; new-session 'codex --yolo'";
 }

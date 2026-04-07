@@ -15,7 +15,9 @@ in
     ./modules/home/ghostty.nix
     ./modules/home/git.nix
     ./modules/home/go.nix
+    ./modules/home/hermes-agent.nix
     ./modules/home/nvim
+    ./modules/home/opencode.nix
     ./modules/home/zellij.nix
     ./modules/home/zsh
     ./modules/home/fnm.nix
@@ -31,7 +33,7 @@ in
     ./modules/home/amp.nix
     ./modules/home/syncthing.nix
     ./modules/home/ovim.nix
-    ./modules/home/autotidy
+    ./modules/home/comfyui.nix
   ];
 
   # Option for simple OpenSnitch rules (consistent with system modules)

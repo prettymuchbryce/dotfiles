@@ -8,6 +8,7 @@
     jq
     unrar
     ffmpeg
+    portaudio
     imagemagick
     llvm
     lld
@@ -17,17 +18,10 @@
 
     # python
     uv
-    (python3.withPackages (
-      ps: with ps; [
-        setuptools
-        pip
-        openai
-        pipx
-      ]
-    ))
+    python3
 
     # nix
-    nixfmt-rfc-style
+    nixfmt
 
     # app dev
     awslogs
@@ -36,6 +30,7 @@
 
     shfmt
     tenv
+    tmux
 
     # Click 8.2.0 introduced changes which broke many packages.
     # So avoid running the tests for now.
@@ -43,6 +38,10 @@
       doCheck = false;
     }))
   ];
+
+  home.file.".config/uv/uv.toml".text = ''
+    exclude-newer = "1 week"
+  '';
 
   programs.gpg = {
     enable = true;
@@ -85,5 +84,10 @@
     enable = true;
     enableZshIntegration = true;
     nix-direnv.enable = true;
+    package = pkgs.direnv.overrideAttrs (old: {
+      env = (old.env or { }) // {
+        CGO_ENABLED = 1;
+      };
+    });
   };
 }

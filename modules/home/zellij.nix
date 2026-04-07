@@ -24,10 +24,6 @@
 
   # Zellij configuration file in KDL format
   home.file.".config/zellij/config.kdl".text = ''
-      load_plugins {
-          "https://github.com/Cynary/zellij-tab-name/releases/download/v0.4.2/zellij-tab-name.wasm"
-      }
-
       keybinds clear-defaults=true {
         normal {
             // uncomment this and adjust key if using copy_on_select=false
