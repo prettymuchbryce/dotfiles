@@ -111,7 +111,7 @@ in
 
     ollama-tailscale-serve = {
       serviceConfig = {
-        ProgramArguments = [ ollamaTailscaleServeScript ];
+        ProgramArguments = [ "${ollamaTailscaleServeScript}" ];
         RunAtLoad = true;
         StandardOutPath = "/Users/bryce/Library/Logs/ollama-tailscale-serve.log";
         StandardErrorPath = "/Users/bryce/Library/Logs/ollama-tailscale-serve.log";
